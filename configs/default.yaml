@@ -1,0 +1,71 @@
+# Project settings. Every script reads this file, so a run can be repeated exactly.
+
+seasons:
+  train: [2022, 2023]   # models learn from these
+  valid: [2024]         # models are tuned and checked on this
+  test: [2025]          # touched once, at the end
+  extra_test: [2026]    # new regulations: generalisation test, touched once, at the end
+
+quick: true           # true = only the first `quick_races` races per season (fast trial run)
+quick_races: 4
+random_seed: 42
+
+paths:
+  cache: data/fastf1_cache       # FastF1's own download cache
+  races: data/races              # one Parquet file per race, written by ingest
+  processed: data/processed      # cleaned laps and features
+  results: results               # tables, charts, metrics
+
+# Races where stops were forced by a special rule, not tyre wear.
+# Each entry: [season, word that appears in the event name]
+rule_forced_races:
+  - [2023, Qatar]    # 18-lap maximum per tyre set
+  - [2025, Monaco]   # three tyre sets required
+  - [2025, Qatar]    # 25-lap maximum per tyre set
+
+clean:
+  min_laps_for_fuel_fit: 100     # a race needs this many clean laps to estimate its fuel slope
+  stint_baseline_laps: 3         # degradation is measured against the first N clean laps of a stint
+
+stage1:
+  thresholds_s: [0.5, 1.0, 1.5]  # pace-loss thresholds tested (seconds per lap vs the stint baseline)
+  primary_threshold_s: 1.0       # the one passed to Stage 2
+  horizon_laps: 40               # projections stop here; beyond it the stint counts as censored
+  forecast_horizons: [1, 5, 10]  # laps ahead used to score degradation forecasts
+  oof_folds: 5                   # race-grouped folds for Stage 2's out-of-fold inputs
+  event_min_laps: 200            # clean laps a circuit needs for its own linear degradation rate
+  min_relative_improvement: 0.01  # XGBoost replaces the linear model only if >= 1% better on validation
+
+stage2:
+  window_laps: 10              # laps of history per prediction (the published baseline used 10)
+  inner_valid_share: 0.2       # share of TRAINING races held out for early stopping and the threshold
+  seeds: [42, 43, 44]          # every neural model is trained once per seed; mean and spread reported
+  max_epochs: 30
+  patience: 5                  # stop after this many epochs without a better held-out PR-AUC
+  batch_size: 256
+  learning_rate: 0.001
+  lstm_hidden: 64
+  dropout: 0.2
+  bilstm_units: [256, 128, 64] # published Bi-LSTM layer sizes (Sasikumar et al., 2025)
+  bilstm_dropout: [0.2, 0.3, 0.3]
+  bilstm_batch_size: 32
+  bilstm_learning_rate: 0.0005
+  bilstm_positive_weight: 3.0  # published class weights {0: 1, 1: 3}
+  focal_alpha: 0.25            # Lin et al. (2017) defaults
+  focal_gamma: 2.0
+  pit_window_laps: 2
+  bootstrap_samples: 1000
+  experiments:                 # run in this order; remove lines to skip
+    - rule_based
+    - xgboost
+    - lstm_tyre_aware
+    - lstm_no_stage1
+    - bilstm_replica
+    - lstm_tyre_aware_focal
+    - lstm_tyre_aware_smote
+  mlflow: false                # true = also log every run to MLflow (pip install mlflow)
+
+evaluation:
+  primary_subset: excluding_rule_forced  # headline results; `all_races` is reported next to it
+  calibration_bins: 10         # equal-count bins for the reliability curves
+  permutation_repeats: 3       # shuffles per feature for the LSTM's permutation importance

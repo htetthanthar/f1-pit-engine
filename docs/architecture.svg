@@ -1,0 +1,231 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1640 1250" width="1640" height="1250">
+<defs><marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse"><path d="M0 0 L10 5 L0 10 Z" fill="#374151"/></marker></defs>
+<rect width="1640" height="1250" fill="#ffffff"/>
+<text x="30" y="44" font-size="23" font-weight="700" fill="#1f2933" text-anchor="start" font-family="Inter, Arial, Helvetica, sans-serif">F1 Tyre-Aware Pit Stop Engine: end-to-end system architecture</text>
+<text x="30" y="68" font-size="13.5" font-weight="400" fill="#4b5563" text-anchor="start" font-family="Inter, Arial, Helvetica, sans-serif">Two-stage machine-learning system: Stage 1 forecasts tyre degradation; Stage 2 uses that forecast to predict the lap on which a driver pits.</text>
+<text x="30" y="112" font-size="13.5" font-weight="700" fill="#1f2933" text-anchor="start" font-family="Inter, Arial, Helvetica, sans-serif">Season splits</text>
+<text x="30" y="130" font-size="11.5" font-weight="400" fill="#4b5563" text-anchor="start" font-family="Inter, Arial, Helvetica, sans-serif">no race is in two splits</text>
+<rect x="200" y="92" width="372" height="50" rx="6" fill="#2b6cb0" opacity="0.12"/>
+<rect x="200" y="92" width="6" height="50" fill="#2b6cb0"/>
+<text x="216" y="113" font-size="13.5" font-weight="700" fill="#2b6cb0" text-anchor="start" font-family="Inter, Arial, Helvetica, sans-serif">Train  2022, 2023</text>
+<text x="216" y="131" font-size="12" font-weight="400" fill="#374151" text-anchor="start" font-family="Inter, Arial, Helvetica, sans-serif">fit every model, slope, threshold</text>
+<rect x="580" y="92" width="292" height="50" rx="6" fill="#2f855a" opacity="0.12"/>
+<rect x="580" y="92" width="6" height="50" fill="#2f855a"/>
+<text x="596" y="113" font-size="13.5" font-weight="700" fill="#2f855a" text-anchor="start" font-family="Inter, Arial, Helvetica, sans-serif">Validation  2024</text>
+<text x="596" y="131" font-size="12" font-weight="400" fill="#374151" text-anchor="start" font-family="Inter, Arial, Helvetica, sans-serif">compare and choose models</text>
+<rect x="880" y="92" width="292" height="50" rx="6" fill="#c05621" opacity="0.12"/>
+<rect x="880" y="92" width="6" height="50" fill="#c05621"/>
+<text x="896" y="113" font-size="13.5" font-weight="700" fill="#c05621" text-anchor="start" font-family="Inter, Arial, Helvetica, sans-serif">Test  2025</text>
+<text x="896" y="131" font-size="12" font-weight="400" fill="#374151" text-anchor="start" font-family="Inter, Arial, Helvetica, sans-serif">final result, scored once</text>
+<rect x="1180" y="92" width="292" height="50" rx="6" fill="#9b2c2c" opacity="0.12"/>
+<rect x="1180" y="92" width="6" height="50" fill="#9b2c2c"/>
+<text x="1196" y="113" font-size="13.5" font-weight="700" fill="#9b2c2c" text-anchor="start" font-family="Inter, Arial, Helvetica, sans-serif">Extra test  2026</text>
+<text x="1196" y="131" font-size="12" font-weight="400" fill="#374151" text-anchor="start" font-family="Inter, Arial, Helvetica, sans-serif">new regulations: generalisation</text>
+<rect x="20" y="190" width="1600" height="190" rx="12" fill="#f3f7fb" stroke="#d5dde6"/>
+<text x="36" y="220" font-size="15" font-weight="700" fill="#1f2933" text-anchor="start" font-family="Inter, Arial, Helvetica, sans-serif">1  Data pipeline</text>
+<text x="36" y="240" font-size="12" font-weight="400" fill="#4b5563" text-anchor="start" font-family="Inter, Arial, Helvetica, sans-serif">Phases 1 to 3</text>
+<rect x="20" y="410" width="1600" height="210" rx="12" fill="#f3f7fb" stroke="#d5dde6"/>
+<text x="36" y="440" font-size="15" font-weight="700" fill="#1f2933" text-anchor="start" font-family="Inter, Arial, Helvetica, sans-serif">2  Models</text>
+<text x="36" y="460" font-size="12" font-weight="400" fill="#4b5563" text-anchor="start" font-family="Inter, Arial, Helvetica, sans-serif">Phases 4 and 5</text>
+<rect x="20" y="650" width="1600" height="250" rx="12" fill="#f3f7fb" stroke="#d5dde6"/>
+<text x="36" y="680" font-size="15" font-weight="700" fill="#1f2933" text-anchor="start" font-family="Inter, Arial, Helvetica, sans-serif">3  Evaluation</text>
+<text x="36" y="700" font-size="12" font-weight="400" fill="#4b5563" text-anchor="start" font-family="Inter, Arial, Helvetica, sans-serif">and outputs. Phases 6 to 8</text>
+<rect x="20" y="930" width="1600" height="190" rx="12" fill="#f6f4fa" stroke="#d5dde6"/>
+<text x="36" y="960" font-size="15" font-weight="700" fill="#1f2933" text-anchor="start" font-family="Inter, Arial, Helvetica, sans-serif">4  Delivery</text>
+<text x="36" y="980" font-size="12" font-weight="400" fill="#4b5563" text-anchor="start" font-family="Inter, Arial, Helvetica, sans-serif">CI, release, hosting</text>
+<rect x="200" y="215" width="250" height="140" rx="10" fill="#eeeeee" stroke="#6b7280" stroke-width="1.6" stroke-dasharray="6 4"/>
+<text x="212" y="237" font-size="13.5" font-weight="700" fill="#1f2933" text-anchor="start" font-family="Inter, Arial, Helvetica, sans-serif">FastF1 library</text>
+<text x="212" y="257" font-size="12.2" font-weight="400" fill="#374151" text-anchor="start" font-family="Inter, Arial, Helvetica, sans-serif">Reads Formula 1&#x27;s public</text>
+<text x="212" y="274" font-size="12.2" font-weight="400" fill="#374151" text-anchor="start" font-family="Inter, Arial, Helvetica, sans-serif">live-timing feed.</text>
+<text x="212" y="291" font-size="12.2" font-weight="400" fill="#374151" text-anchor="start" font-family="Inter, Arial, Helvetica, sans-serif">Race sessions, 2022 to 2026.</text>
+<rect x="482" y="215" width="250" height="140" rx="10" fill="#dbe9f6" stroke="#2b6cb0" stroke-width="1.6"/>
+<text x="494" y="237" font-size="13.5" font-weight="700" fill="#1f2933" text-anchor="start" font-family="Inter, Arial, Helvetica, sans-serif">Download</text>
+<text x="720" y="237" font-size="11" font-weight="600" fill="#2b6cb0" text-anchor="end" font-family="ui-monospace, Menlo, Consolas, monospace">ingest.py</text>
+<text x="494" y="257" font-size="12.2" font-weight="400" fill="#374151" text-anchor="start" font-family="Inter, Arial, Helvetica, sans-serif">One file per race, cached,</text>
+<text x="494" y="274" font-size="12.2" font-weight="400" fill="#374151" text-anchor="start" font-family="Inter, Arial, Helvetica, sans-serif">so a rerun only fills gaps.</text>
+<text x="494" y="291" font-size="12.2" font-weight="400" fill="#374151" text-anchor="start" font-family="Inter, Arial, Helvetica, sans-serif">Failures are logged.</text>
+<rect x="764" y="215" width="250" height="140" rx="10" fill="#dbe9f6" stroke="#2b6cb0" stroke-width="1.6"/>
+<text x="776" y="237" font-size="13.5" font-weight="700" fill="#1f2933" text-anchor="start" font-family="Inter, Arial, Helvetica, sans-serif">Clean and label</text>
+<text x="1002" y="237" font-size="11" font-weight="600" fill="#2b6cb0" text-anchor="end" font-family="ui-monospace, Menlo, Consolas, monospace">clean.py</text>
+<text x="776" y="257" font-size="12.2" font-weight="400" fill="#374151" text-anchor="start" font-family="Inter, Arial, Helvetica, sans-serif">Remove wet races.</text>
+<text x="776" y="274" font-size="12.2" font-weight="400" fill="#374151" text-anchor="start" font-family="Inter, Arial, Helvetica, sans-serif">Label pit laps (not retirements).</text>
+<text x="776" y="291" font-size="12.2" font-weight="400" fill="#374151" text-anchor="start" font-family="Inter, Arial, Helvetica, sans-serif">Flag rule-forced races.</text>
+<text x="776" y="308" font-size="12.2" font-weight="400" fill="#374151" text-anchor="start" font-family="Inter, Arial, Helvetica, sans-serif">Assign each season&#x27;s split.</text>
+<rect x="1046" y="215" width="250" height="140" rx="10" fill="#dbe9f6" stroke="#2b6cb0" stroke-width="1.6"/>
+<text x="1058" y="237" font-size="13.5" font-weight="700" fill="#1f2933" text-anchor="start" font-family="Inter, Arial, Helvetica, sans-serif">Features</text>
+<text x="1284" y="237" font-size="11" font-weight="600" fill="#2b6cb0" text-anchor="end" font-family="ui-monospace, Menlo, Consolas, monospace">features.py</text>
+<text x="1058" y="257" font-size="12.2" font-weight="400" fill="#374151" text-anchor="start" font-family="Inter, Arial, Helvetica, sans-serif">Fuel correction: slopes from</text>
+<text x="1058" y="274" font-size="12.2" font-weight="400" fill="#374151" text-anchor="start" font-family="Inter, Arial, Helvetica, sans-serif">training races only.</text>
+<text x="1058" y="291" font-size="12.2" font-weight="400" fill="#374151" text-anchor="start" font-family="Inter, Arial, Helvetica, sans-serif">Tyre degradation per stint.</text>
+<text x="1058" y="308" font-size="12.2" font-weight="400" fill="#374151" text-anchor="start" font-family="Inter, Arial, Helvetica, sans-serif">15 inputs, previous laps only.</text>
+<rect x="1328" y="215" width="250" height="140" rx="4" fill="#ffffff" stroke="#6b7280" stroke-width="1.6"/>
+<path d="M1562 215 L1578 231 L1562 231 Z" fill="#e5e7eb" stroke="#6b7280" stroke-width="1"/>
+<text x="1340" y="237" font-size="13.5" font-weight="700" fill="#1f2933" text-anchor="start" font-family="Inter, Arial, Helvetica, sans-serif">Feature table</text>
+<text x="1340" y="257" font-size="12.2" font-weight="400" fill="#374151" text-anchor="start" font-family="Inter, Arial, Helvetica, sans-serif">One row per lap:</text>
+<text x="1340" y="274" font-size="12.2" font-weight="400" fill="#374151" text-anchor="start" font-family="Inter, Arial, Helvetica, sans-serif">tyre, race state, recent pace,</text>
+<text x="1340" y="291" font-size="12.2" font-weight="400" fill="#374151" text-anchor="start" font-family="Inter, Arial, Helvetica, sans-serif">traffic, weather, pit label.</text>
+<text x="1340" y="308" font-size="11.5" font-weight="400" fill="#374151" text-anchor="start" font-family="ui-monospace, Menlo, Consolas, monospace">features.parquet</text>
+<path d="M450 285.0 L482 285.0" fill="none" stroke="#374151" stroke-width="1.8" marker-end="url(#arrow)"/>
+<path d="M732 285.0 L764 285.0" fill="none" stroke="#374151" stroke-width="1.8" marker-end="url(#arrow)"/>
+<path d="M1014 285.0 L1046 285.0" fill="none" stroke="#374151" stroke-width="1.8" marker-end="url(#arrow)"/>
+<path d="M1296 285.0 L1328 285.0" fill="none" stroke="#374151" stroke-width="1.8" marker-end="url(#arrow)"/>
+<rect x="200" y="435" width="250" height="160" rx="10" fill="#dbe9f6" stroke="#2b6cb0" stroke-width="1.6"/>
+<text x="212" y="457" font-size="13.5" font-weight="700" fill="#1f2933" text-anchor="start" font-family="Inter, Arial, Helvetica, sans-serif">Stage 1: tyre forecast</text>
+<text x="438" y="457" font-size="11" font-weight="600" fill="#2b6cb0" text-anchor="end" font-family="ui-monospace, Menlo, Consolas, monospace">stage1.py</text>
+<text x="212" y="477" font-size="12.2" font-weight="400" fill="#374151" text-anchor="start" font-family="Inter, Arial, Helvetica, sans-serif">Linear model vs XGBoost.</text>
+<text x="212" y="494" font-size="12.2" font-weight="400" fill="#374151" text-anchor="start" font-family="Inter, Arial, Helvetica, sans-serif">Output: laps until pace loss</text>
+<text x="212" y="511" font-size="12.2" font-weight="400" fill="#374151" text-anchor="start" font-family="Inter, Arial, Helvetica, sans-serif">passes 1.0 s.</text>
+<text x="212" y="528" font-size="12.2" font-weight="400" fill="#374151" text-anchor="start" font-family="Inter, Arial, Helvetica, sans-serif">Training races get out-of-fold</text>
+<text x="212" y="545" font-size="12.2" font-weight="400" fill="#374151" text-anchor="start" font-family="Inter, Arial, Helvetica, sans-serif">forecasts.</text>
+<rect x="482" y="435" width="250" height="160" rx="4" fill="#ffffff" stroke="#6b7280" stroke-width="1.6"/>
+<path d="M716 435 L732 451 L716 451 Z" fill="#e5e7eb" stroke="#6b7280" stroke-width="1"/>
+<text x="494" y="457" font-size="13.5" font-weight="700" fill="#1f2933" text-anchor="start" font-family="Inter, Arial, Helvetica, sans-serif">Features + forecast</text>
+<text x="494" y="477" font-size="12.2" font-weight="400" fill="#374151" text-anchor="start" font-family="Inter, Arial, Helvetica, sans-serif">Adds two inputs for Stage 2:</text>
+<text x="494" y="494" font-size="12.2" font-weight="400" fill="#374151" text-anchor="start" font-family="Inter, Arial, Helvetica, sans-serif">laps to threshold, and</text>
+<text x="494" y="511" font-size="12.2" font-weight="400" fill="#374151" text-anchor="start" font-family="Inter, Arial, Helvetica, sans-serif">&quot;not reached&quot; flag.</text>
+<text x="494" y="528" font-size="11.5" font-weight="400" fill="#374151" text-anchor="start" font-family="ui-monospace, Menlo, Consolas, monospace">features_stage1.parquet</text>
+<rect x="764" y="435" width="250" height="160" rx="10" fill="#dbe9f6" stroke="#2b6cb0" stroke-width="1.6"/>
+<text x="776" y="457" font-size="13.5" font-weight="700" fill="#1f2933" text-anchor="start" font-family="Inter, Arial, Helvetica, sans-serif">Stage 2: pit-lap models</text>
+<text x="1002" y="457" font-size="11" font-weight="600" fill="#2b6cb0" text-anchor="end" font-family="ui-monospace, Menlo, Consolas, monospace">stage2.py</text>
+<text x="776" y="477" font-size="12.2" font-weight="400" fill="#374151" text-anchor="start" font-family="Inter, Arial, Helvetica, sans-serif">7 experiments, 3 seeds each:</text>
+<text x="776" y="494" font-size="12.2" font-weight="400" fill="#374151" text-anchor="start" font-family="Inter, Arial, Helvetica, sans-serif">rule, XGBoost, LSTM with and</text>
+<text x="776" y="511" font-size="12.2" font-weight="400" fill="#374151" text-anchor="start" font-family="Inter, Arial, Helvetica, sans-serif">without Stage 1, Bi-LSTM,</text>
+<text x="776" y="528" font-size="12.2" font-weight="400" fill="#374151" text-anchor="start" font-family="Inter, Arial, Helvetica, sans-serif">focal loss, SMOTE.</text>
+<text x="776" y="545" font-size="12.2" font-weight="400" fill="#374151" text-anchor="start" font-family="Inter, Arial, Helvetica, sans-serif">Last 10 laps per prediction.</text>
+<rect x="1046" y="435" width="250" height="160" rx="4" fill="#ffffff" stroke="#6b7280" stroke-width="1.6"/>
+<path d="M1280 435 L1296 451 L1280 451 Z" fill="#e5e7eb" stroke="#6b7280" stroke-width="1"/>
+<text x="1058" y="457" font-size="13.5" font-weight="700" fill="#1f2933" text-anchor="start" font-family="Inter, Arial, Helvetica, sans-serif">Frozen models</text>
+<text x="1058" y="477" font-size="12.2" font-weight="400" fill="#374151" text-anchor="start" font-family="Inter, Arial, Helvetica, sans-serif">Trained models and a manifest</text>
+<text x="1058" y="494" font-size="12.2" font-weight="400" fill="#374151" text-anchor="start" font-family="Inter, Arial, Helvetica, sans-serif">that freezes every decision</text>
+<text x="1058" y="511" font-size="12.2" font-weight="400" fill="#374151" text-anchor="start" font-family="Inter, Arial, Helvetica, sans-serif">threshold (chosen on held-out</text>
+<text x="1058" y="528" font-size="12.2" font-weight="400" fill="#374151" text-anchor="start" font-family="Inter, Arial, Helvetica, sans-serif">training races).</text>
+<text x="1058" y="545" font-size="11.5" font-weight="400" fill="#374151" text-anchor="start" font-family="ui-monospace, Menlo, Consolas, monospace">results/models/</text>
+<rect x="1328" y="435" width="250" height="160" rx="4" fill="#ffffff" stroke="#6b7280" stroke-width="1.6"/>
+<path d="M1562 435 L1578 451 L1562 451 Z" fill="#e5e7eb" stroke="#6b7280" stroke-width="1"/>
+<text x="1340" y="457" font-size="13.5" font-weight="700" fill="#1f2933" text-anchor="start" font-family="Inter, Arial, Helvetica, sans-serif">Validation results</text>
+<text x="1340" y="477" font-size="12.2" font-weight="400" fill="#374151" text-anchor="start" font-family="Inter, Arial, Helvetica, sans-serif">Scores on 2024 with race-level</text>
+<text x="1340" y="494" font-size="12.2" font-weight="400" fill="#374151" text-anchor="start" font-family="Inter, Arial, Helvetica, sans-serif">confidence intervals.</text>
+<text x="1340" y="511" font-size="12.2" font-weight="400" fill="#374151" text-anchor="start" font-family="Inter, Arial, Helvetica, sans-serif">First look at H1 and H2.</text>
+<text x="1340" y="528" font-size="11.5" font-weight="400" fill="#374151" text-anchor="start" font-family="ui-monospace, Menlo, Consolas, monospace">stage2_metrics.json</text>
+<path d="M1453.0 355 L1453.0 395 L325.0 395 L325.0 435" fill="none" stroke="#374151" stroke-width="1.8" marker-end="url(#arrow)"/>
+<path d="M450 515.0 L482 515.0" fill="none" stroke="#374151" stroke-width="1.8" marker-end="url(#arrow)"/>
+<path d="M732 515.0 L764 515.0" fill="none" stroke="#374151" stroke-width="1.8" marker-end="url(#arrow)"/>
+<path d="M1014 515.0 L1046 515.0" fill="none" stroke="#374151" stroke-width="1.8" marker-end="url(#arrow)"/>
+<path d="M889.0 435 L889.0 420 L1453.0 420 L1453.0 435" fill="none" stroke="#374151" stroke-width="1.8" marker-end="url(#arrow)" stroke-dasharray="5 4"/>
+<rect x="200" y="675" width="250" height="200" rx="10" fill="#dbe9f6" stroke="#2b6cb0" stroke-width="1.6"/>
+<text x="212" y="697" font-size="13.5" font-weight="700" fill="#1f2933" text-anchor="start" font-family="Inter, Arial, Helvetica, sans-serif">Final test</text>
+<text x="438" y="697" font-size="11" font-weight="600" fill="#2b6cb0" text-anchor="end" font-family="ui-monospace, Menlo, Consolas, monospace">evaluate.py</text>
+<text x="212" y="717" font-size="12.2" font-weight="400" fill="#374151" text-anchor="start" font-family="Inter, Arial, Helvetica, sans-serif">Scores the frozen models on</text>
+<text x="212" y="734" font-size="12.2" font-weight="400" fill="#374151" text-anchor="start" font-family="Inter, Arial, Helvetica, sans-serif">2025 and 2026. Nothing is tuned</text>
+<text x="212" y="751" font-size="12.2" font-weight="400" fill="#374151" text-anchor="start" font-family="Inter, Arial, Helvetica, sans-serif">on these seasons.</text>
+<text x="212" y="768" font-size="12.2" font-weight="400" fill="#374151" text-anchor="start" font-family="Inter, Arial, Helvetica, sans-serif">Bootstrap intervals; H1 and H2</text>
+<text x="212" y="785" font-size="12.2" font-weight="400" fill="#374151" text-anchor="start" font-family="Inter, Arial, Helvetica, sans-serif">with Holm correction;</text>
+<text x="212" y="802" font-size="12.2" font-weight="400" fill="#374151" text-anchor="start" font-family="Inter, Arial, Helvetica, sans-serif">calibration; SHAP;</text>
+<text x="212" y="819" font-size="12.2" font-weight="400" fill="#374151" text-anchor="start" font-family="Inter, Arial, Helvetica, sans-serif">every run is logged.</text>
+<rect x="482" y="675" width="250" height="200" rx="4" fill="#ffffff" stroke="#6b7280" stroke-width="1.6"/>
+<path d="M716 675 L732 691 L716 691 Z" fill="#e5e7eb" stroke="#6b7280" stroke-width="1"/>
+<text x="494" y="697" font-size="13.5" font-weight="700" fill="#1f2933" text-anchor="start" font-family="Inter, Arial, Helvetica, sans-serif">Final results</text>
+<text x="494" y="717" font-size="12.2" font-weight="400" fill="#374151" text-anchor="start" font-family="Inter, Arial, Helvetica, sans-serif">Metrics for every model, with</text>
+<text x="494" y="734" font-size="12.2" font-weight="400" fill="#374151" text-anchor="start" font-family="Inter, Arial, Helvetica, sans-serif">and without rule-forced races.</text>
+<text x="494" y="751" font-size="12.2" font-weight="400" fill="#374151" text-anchor="start" font-family="Inter, Arial, Helvetica, sans-serif">Per-lap predictions.</text>
+<text x="494" y="768" font-size="12.2" font-weight="400" fill="#374151" text-anchor="start" font-family="Inter, Arial, Helvetica, sans-serif">Charts for the report.</text>
+<text x="494" y="785" font-size="11.5" font-weight="400" fill="#374151" text-anchor="start" font-family="ui-monospace, Menlo, Consolas, monospace">final_metrics.json</text>
+<text x="494" y="802" font-size="11.5" font-weight="400" fill="#374151" text-anchor="start" font-family="ui-monospace, Menlo, Consolas, monospace">final_predictions.parquet</text>
+<text x="494" y="819" font-size="11.5" font-weight="400" fill="#374151" text-anchor="start" font-family="ui-monospace, Menlo, Consolas, monospace">figures/*.png</text>
+<rect x="764" y="675" width="250" height="92" rx="10" fill="#dbe9f6" stroke="#2b6cb0" stroke-width="1.6"/>
+<text x="776" y="697" font-size="13.5" font-weight="700" fill="#1f2933" text-anchor="start" font-family="Inter, Arial, Helvetica, sans-serif">Report pack</text>
+<text x="1002" y="697" font-size="11" font-weight="600" fill="#2b6cb0" text-anchor="end" font-family="ui-monospace, Menlo, Consolas, monospace">report.py</text>
+<text x="776" y="717" font-size="12.2" font-weight="400" fill="#374151" text-anchor="start" font-family="Inter, Arial, Helvetica, sans-serif">Tables 1 to 9 and the facts</text>
+<text x="776" y="734" font-size="12.2" font-weight="400" fill="#374151" text-anchor="start" font-family="Inter, Arial, Helvetica, sans-serif">of the run, from saved results.</text>
+<rect x="764" y="783" width="250" height="92" rx="10" fill="#dbe9f6" stroke="#2b6cb0" stroke-width="1.6"/>
+<text x="776" y="805" font-size="13.5" font-weight="700" fill="#1f2933" text-anchor="start" font-family="Inter, Arial, Helvetica, sans-serif">Dashboard export</text>
+<text x="1002" y="805" font-size="11" font-weight="600" fill="#2b6cb0" text-anchor="end" font-family="ui-monospace, Menlo, Consolas, monospace">dashboard.py</text>
+<text x="776" y="825" font-size="12.2" font-weight="400" fill="#374151" text-anchor="start" font-family="Inter, Arial, Helvetica, sans-serif">Small bundle of results;</text>
+<text x="776" y="842" font-size="12.2" font-weight="400" fill="#374151" text-anchor="start" font-family="Inter, Arial, Helvetica, sans-serif">no training libraries needed.</text>
+<rect x="1046" y="675" width="250" height="92" rx="4" fill="#ffffff" stroke="#6b7280" stroke-width="1.6"/>
+<path d="M1280 675 L1296 691 L1280 691 Z" fill="#e5e7eb" stroke="#6b7280" stroke-width="1"/>
+<text x="1058" y="697" font-size="13.5" font-weight="700" fill="#1f2933" text-anchor="start" font-family="Inter, Arial, Helvetica, sans-serif">Tables for the report</text>
+<text x="1058" y="717" font-size="11.5" font-weight="400" fill="#374151" text-anchor="start" font-family="ui-monospace, Menlo, Consolas, monospace">results/report/*.md</text>
+<rect x="1046" y="783" width="250" height="92" rx="4" fill="#ffffff" stroke="#6b7280" stroke-width="1.6"/>
+<path d="M1280 783 L1296 799 L1280 799 Z" fill="#e5e7eb" stroke="#6b7280" stroke-width="1"/>
+<text x="1058" y="805" font-size="13.5" font-weight="700" fill="#1f2933" text-anchor="start" font-family="Inter, Arial, Helvetica, sans-serif">Dashboard bundle</text>
+<text x="1058" y="825" font-size="11.5" font-weight="400" fill="#374151" text-anchor="start" font-family="ui-monospace, Menlo, Consolas, monospace">app/data/</text>
+<text x="1058" y="842" font-size="12.2" font-weight="400" fill="#374151" text-anchor="start" font-family="Inter, Arial, Helvetica, sans-serif">1 to 3 MB, no raw race data.</text>
+<rect x="1328" y="675" width="250" height="92" rx="10" fill="#fdf3d8" stroke="#b7791f" stroke-width="1.6"/>
+<text x="1340" y="697" font-size="13.5" font-weight="700" fill="#1f2933" text-anchor="start" font-family="Inter, Arial, Helvetica, sans-serif">Written report and viva</text>
+<text x="1340" y="717" font-size="12.2" font-weight="400" fill="#374151" text-anchor="start" font-family="Inter, Arial, Helvetica, sans-serif">Written by the student from</text>
+<text x="1340" y="734" font-size="12.2" font-weight="400" fill="#374151" text-anchor="start" font-family="Inter, Arial, Helvetica, sans-serif">the tables and charts.</text>
+<rect x="1328" y="783" width="250" height="92" rx="10" fill="#dbe9f6" stroke="#2b6cb0" stroke-width="1.6"/>
+<text x="1340" y="805" font-size="13.5" font-weight="700" fill="#1f2933" text-anchor="start" font-family="Inter, Arial, Helvetica, sans-serif">Streamlit dashboard</text>
+<text x="1566" y="805" font-size="11" font-weight="600" fill="#2b6cb0" text-anchor="end" font-family="ui-monospace, Menlo, Consolas, monospace">app/</text>
+<text x="1340" y="825" font-size="12.2" font-weight="400" fill="#374151" text-anchor="start" font-family="Inter, Arial, Helvetica, sans-serif">Race replay, results,</text>
+<text x="1340" y="842" font-size="12.2" font-weight="400" fill="#374151" text-anchor="start" font-family="Inter, Arial, Helvetica, sans-serif">hypotheses, explanations.</text>
+<path d="M1171.0 595 L1171.0 632 L370.0 632 L370.0 675" fill="none" stroke="#374151" stroke-width="1.8" marker-end="url(#arrow)"/>
+<text x="889.0" y="646" font-size="11.5" font-weight="500" fill="#4b5563" text-anchor="middle" font-family="Inter, Arial, Helvetica, sans-serif">frozen models and thresholds</text>
+<path d="M607.0 595 L607.0 612 L280.0 612 L280.0 675" fill="none" stroke="#374151" stroke-width="1.8" marker-end="url(#arrow)"/>
+<text x="466" y="607" font-size="11.5" font-weight="500" fill="#4b5563" text-anchor="middle" font-family="Inter, Arial, Helvetica, sans-serif">2025 and 2026 laps</text>
+<path d="M450 775 L482 775" fill="none" stroke="#374151" stroke-width="1.8" marker-end="url(#arrow)"/>
+<path d="M732 721 L764 721" fill="none" stroke="#374151" stroke-width="1.8" marker-end="url(#arrow)"/>
+<path d="M732 829 L764 829" fill="none" stroke="#374151" stroke-width="1.8" marker-end="url(#arrow)"/>
+<path d="M1014 721 L1046 721" fill="none" stroke="#374151" stroke-width="1.8" marker-end="url(#arrow)"/>
+<path d="M1296 721 L1328 721" fill="none" stroke="#374151" stroke-width="1.8" marker-end="url(#arrow)"/>
+<path d="M1014 829 L1046 829" fill="none" stroke="#374151" stroke-width="1.8" marker-end="url(#arrow)"/>
+<path d="M1296 829 L1328 829" fill="none" stroke="#374151" stroke-width="1.8" marker-end="url(#arrow)"/>
+<rect x="200" y="955" width="250" height="140" rx="10" fill="#e9e2f5" stroke="#6b46c1" stroke-width="1.6"/>
+<text x="212" y="977" font-size="13.5" font-weight="700" fill="#1f2933" text-anchor="start" font-family="Inter, Arial, Helvetica, sans-serif">GitHub repository</text>
+<text x="212" y="997" font-size="12.2" font-weight="400" fill="#374151" text-anchor="start" font-family="Inter, Arial, Helvetica, sans-serif">Code, one settings file,</text>
+<text x="212" y="1014" font-size="12.2" font-weight="400" fill="#374151" text-anchor="start" font-family="Inter, Arial, Helvetica, sans-serif">71 tests, dashboard and its</text>
+<text x="212" y="1031" font-size="12.2" font-weight="400" fill="#374151" text-anchor="start" font-family="Inter, Arial, Helvetica, sans-serif">data bundle.</text>
+<text x="212" y="1048" font-size="11.5" font-weight="400" fill="#374151" text-anchor="start" font-family="ui-monospace, Menlo, Consolas, monospace">configs/default.yaml</text>
+<rect x="482" y="955" width="250" height="140" rx="10" fill="#e9e2f5" stroke="#6b46c1" stroke-width="1.6"/>
+<text x="494" y="977" font-size="13.5" font-weight="700" fill="#1f2933" text-anchor="start" font-family="Inter, Arial, Helvetica, sans-serif">CI on every push</text>
+<text x="720" y="977" font-size="11" font-weight="600" fill="#6b46c1" text-anchor="end" font-family="ui-monospace, Menlo, Consolas, monospace">ci.yml</text>
+<text x="494" y="997" font-size="12.2" font-weight="400" fill="#374151" text-anchor="start" font-family="Inter, Arial, Helvetica, sans-serif">Lint and tests.</text>
+<text x="494" y="1014" font-size="12.2" font-weight="400" fill="#374151" text-anchor="start" font-family="Inter, Arial, Helvetica, sans-serif">Builds the test image and the</text>
+<text x="494" y="1031" font-size="12.2" font-weight="400" fill="#374151" text-anchor="start" font-family="Inter, Arial, Helvetica, sans-serif">dashboard image; runs the app</text>
+<text x="494" y="1048" font-size="12.2" font-weight="400" fill="#374151" text-anchor="start" font-family="Inter, Arial, Helvetica, sans-serif">inside it; checks its health.</text>
+<rect x="764" y="955" width="250" height="140" rx="10" fill="#e9e2f5" stroke="#6b46c1" stroke-width="1.6"/>
+<text x="776" y="977" font-size="13.5" font-weight="700" fill="#1f2933" text-anchor="start" font-family="Inter, Arial, Helvetica, sans-serif">Release on a tag</text>
+<text x="1002" y="977" font-size="11" font-weight="600" fill="#6b46c1" text-anchor="end" font-family="ui-monospace, Menlo, Consolas, monospace">release.yml</text>
+<text x="776" y="997" font-size="12.2" font-weight="400" fill="#374151" text-anchor="start" font-family="Inter, Arial, Helvetica, sans-serif">A version tag runs the tests,</text>
+<text x="776" y="1014" font-size="12.2" font-weight="400" fill="#374151" text-anchor="start" font-family="Inter, Arial, Helvetica, sans-serif">then publishes the dashboard</text>
+<text x="776" y="1031" font-size="12.2" font-weight="400" fill="#374151" text-anchor="start" font-family="Inter, Arial, Helvetica, sans-serif">image to the GitHub Container</text>
+<text x="776" y="1048" font-size="12.2" font-weight="400" fill="#374151" text-anchor="start" font-family="Inter, Arial, Helvetica, sans-serif">Registry.</text>
+<rect x="1046" y="955" width="250" height="140" rx="10" fill="#e9e2f5" stroke="#6b46c1" stroke-width="1.6"/>
+<text x="1058" y="977" font-size="13.5" font-weight="700" fill="#1f2933" text-anchor="start" font-family="Inter, Arial, Helvetica, sans-serif">Hosting</text>
+<text x="1284" y="977" font-size="11" font-weight="600" fill="#6b46c1" text-anchor="end" font-family="ui-monospace, Menlo, Consolas, monospace">Dockerfile.dashboard</text>
+<text x="1058" y="997" font-size="12.2" font-weight="400" fill="#374151" text-anchor="start" font-family="Inter, Arial, Helvetica, sans-serif">Streamlit Community Cloud,</text>
+<text x="1058" y="1014" font-size="12.2" font-weight="400" fill="#374151" text-anchor="start" font-family="Inter, Arial, Helvetica, sans-serif">or any container host:</text>
+<text x="1058" y="1031" font-size="12.2" font-weight="400" fill="#374151" text-anchor="start" font-family="Inter, Arial, Helvetica, sans-serif">port 8501, non-root user,</text>
+<text x="1058" y="1048" font-size="12.2" font-weight="400" fill="#374151" text-anchor="start" font-family="Inter, Arial, Helvetica, sans-serif">health check.</text>
+<rect x="1328" y="955" width="250" height="140" rx="10" fill="#fdf3d8" stroke="#b7791f" stroke-width="1.6"/>
+<text x="1340" y="977" font-size="13.5" font-weight="700" fill="#1f2933" text-anchor="start" font-family="Inter, Arial, Helvetica, sans-serif">Users</text>
+<text x="1340" y="997" font-size="12.2" font-weight="400" fill="#374151" text-anchor="start" font-family="Inter, Arial, Helvetica, sans-serif">Examiner, supervisor, employer:</text>
+<text x="1340" y="1014" font-size="12.2" font-weight="400" fill="#374151" text-anchor="start" font-family="Inter, Arial, Helvetica, sans-serif">open the dashboard in a</text>
+<text x="1340" y="1031" font-size="12.2" font-weight="400" fill="#374151" text-anchor="start" font-family="Inter, Arial, Helvetica, sans-serif">browser. No install needed.</text>
+<path d="M450 1025.0 L482 1025.0" fill="none" stroke="#374151" stroke-width="1.8" marker-end="url(#arrow)"/>
+<path d="M732 1025.0 L764 1025.0" fill="none" stroke="#374151" stroke-width="1.8" marker-end="url(#arrow)"/>
+<path d="M1014 1025.0 L1046 1025.0" fill="none" stroke="#374151" stroke-width="1.8" marker-end="url(#arrow)"/>
+<path d="M1296 1025.0 L1328 1025.0" fill="none" stroke="#374151" stroke-width="1.8" marker-end="url(#arrow)"/>
+<path d="M1171.0 875 L1171.0 908 L325.0 908 L325.0 955" fill="none" stroke="#374151" stroke-width="1.8" marker-end="url(#arrow)"/>
+<text x="889.0" y="923" font-size="11.5" font-weight="500" fill="#4b5563" text-anchor="middle" font-family="Inter, Arial, Helvetica, sans-serif">the bundle is committed with the code</text>
+<text x="30" y="1164" font-size="13.5" font-weight="700" fill="#1f2933" text-anchor="start" font-family="Inter, Arial, Helvetica, sans-serif">Where it runs</text>
+<text x="30" y="1184" font-size="12.2" font-weight="400" fill="#374151" text-anchor="start" font-family="Inter, Arial, Helvetica, sans-serif">Training: Google Colab GPU (notebook runs every phase).</text>
+<text x="30" y="1202" font-size="12.2" font-weight="400" fill="#374151" text-anchor="start" font-family="Inter, Arial, Helvetica, sans-serif">Tests: offline, on computer-generated races with known answers.</text>
+<text x="30" y="1220" font-size="12.2" font-weight="400" fill="#374151" text-anchor="start" font-family="Inter, Arial, Helvetica, sans-serif">Dashboard: reads the bundle only; it never trains or scores a model.</text>
+<text x="620" y="1164" font-size="13.5" font-weight="700" fill="#1f2933" text-anchor="start" font-family="Inter, Arial, Helvetica, sans-serif">Key</text>
+<rect x="620" y="1178" width="30" height="18" rx="5" fill="#dbe9f6" stroke="#2b6cb0" stroke-width="1.5"/>
+<text x="660" y="1192" font-size="12.2" font-weight="400" fill="#374151" text-anchor="start" font-family="Inter, Arial, Helvetica, sans-serif">Pipeline step (Python module)</text>
+<rect x="950" y="1178" width="30" height="18" rx="2" fill="#ffffff" stroke="#6b7280" stroke-width="1.5"/>
+<text x="990" y="1192" font-size="12.2" font-weight="400" fill="#374151" text-anchor="start" font-family="Inter, Arial, Helvetica, sans-serif">Saved file or folder</text>
+<rect x="1280" y="1178" width="30" height="18" rx="5" fill="#eeeeee" stroke="#6b7280" stroke-width="1.5" stroke-dasharray="6 4"/>
+<text x="1320" y="1192" font-size="12.2" font-weight="400" fill="#374151" text-anchor="start" font-family="Inter, Arial, Helvetica, sans-serif">External source</text>
+<rect x="620" y="1208" width="30" height="18" rx="5" fill="#e9e2f5" stroke="#6b46c1" stroke-width="1.5"/>
+<text x="660" y="1222" font-size="12.2" font-weight="400" fill="#374151" text-anchor="start" font-family="Inter, Arial, Helvetica, sans-serif">Delivery and operations</text>
+<rect x="950" y="1208" width="30" height="18" rx="5" fill="#fdf3d8" stroke="#b7791f" stroke-width="1.5"/>
+<text x="990" y="1222" font-size="12.2" font-weight="400" fill="#374151" text-anchor="start" font-family="Inter, Arial, Helvetica, sans-serif">People</text>
+<path d="M1280 1217 L1320 1217" fill="none" stroke="#374151" stroke-width="1.8" marker-end="url(#arrow)"/>
+<text x="1330" y="1221" font-size="12.2" font-weight="400" fill="#374151" text-anchor="start" font-family="Inter, Arial, Helvetica, sans-serif">data flow</text>
+<path d="M1420 1217 L1460 1217" fill="none" stroke="#374151" stroke-width="1.8" marker-end="url(#arrow)" stroke-dasharray="5 4"/>
+<text x="1470" y="1221" font-size="12.2" font-weight="400" fill="#374151" text-anchor="start" font-family="Inter, Arial, Helvetica, sans-serif">scores only</text>
+</svg>

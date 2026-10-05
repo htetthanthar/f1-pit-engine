@@ -1,0 +1,6 @@
+# Dependencies of the deployed dashboard only (no training libraries).
+streamlit>=1.52
+altair>=5
+pandas>=2.0
+numpy>=1.24
+pyarrow>=14

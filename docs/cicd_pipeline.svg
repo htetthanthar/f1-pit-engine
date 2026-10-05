@@ -1,0 +1,142 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1640 1010" width="1640" height="1010">
+<defs><marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse"><path d="M0 0 L10 5 L0 10 Z" fill="#374151"/></marker></defs>
+<rect width="1640" height="1010" fill="#ffffff"/>
+<text x="30" y="44" font-size="23" font-weight="700" fill="#1f2933" text-anchor="start" font-family="Inter, Arial, Helvetica, sans-serif">F1 Tyre-Aware Pit Stop Engine: CI/CD pipeline</text>
+<text x="30" y="68" font-size="13.5" font-weight="400" fill="#4b5563" text-anchor="start" font-family="Inter, Arial, Helvetica, sans-serif">GitHub Actions checks every change, publishes a versioned dashboard image on a tag, and the public dashboard redeploys from the main branch.</text>
+<rect x="20" y="100" width="1600" height="330" rx="12" fill="#f3f7fb" stroke="#d5dde6"/>
+<text x="36" y="130" font-size="15" font-weight="700" fill="#1f2933" text-anchor="start" font-family="Inter, Arial, Helvetica, sans-serif">1  Continuous</text>
+<text x="36" y="150" font-size="12" font-weight="400" fill="#4b5563" text-anchor="start" font-family="Inter, Arial, Helvetica, sans-serif">integration</text>
+<text x="36" y="167" font-size="12" font-weight="400" fill="#4b5563" text-anchor="start" font-family="Inter, Arial, Helvetica, sans-serif">ci.yml: every push</text>
+<text x="36" y="184" font-size="12" font-weight="400" fill="#4b5563" text-anchor="start" font-family="Inter, Arial, Helvetica, sans-serif">and pull request</text>
+<rect x="200" y="130" width="262" height="110" rx="10" fill="#fdf3d8" stroke="#b7791f" stroke-width="1.6"/>
+<text x="212" y="152" font-size="13.5" font-weight="700" fill="#1f2933" text-anchor="start" font-family="Inter, Arial, Helvetica, sans-serif">Developer</text>
+<text x="212" y="172" font-size="12.2" font-weight="400" fill="#374151" text-anchor="start" font-family="Inter, Arial, Helvetica, sans-serif">git push or pull request</text>
+<text x="212" y="189" font-size="12.2" font-weight="400" fill="#374151" text-anchor="start" font-family="Inter, Arial, Helvetica, sans-serif">to the GitHub repository</text>
+<rect x="490" y="130" width="262" height="270" rx="10" fill="#e3f3e6" stroke="#2f855a" stroke-width="1.6"/>
+<text x="502" y="152" font-size="13.5" font-weight="700" fill="#1f2933" text-anchor="start" font-family="Inter, Arial, Helvetica, sans-serif">Job: test</text>
+<text x="740" y="152" font-size="11" font-weight="600" fill="#2f855a" text-anchor="end" font-family="ui-monospace, Menlo, Consolas, monospace">gate</text>
+<text x="502" y="172" font-size="12.2" font-weight="400" fill="#374151" text-anchor="start" font-family="Inter, Arial, Helvetica, sans-serif">Ubuntu runner, Python 3.11</text>
+<text x="502" y="189" font-size="12.2" font-weight="400" fill="#374151" text-anchor="start" font-family="Inter, Arial, Helvetica, sans-serif">Install PyTorch (CPU build) and</text>
+<text x="502" y="206" font-size="12.2" font-weight="400" fill="#374151" text-anchor="start" font-family="Inter, Arial, Helvetica, sans-serif">the package with dev, dl, app extras</text>
+<text x="502" y="223" font-size="12.2" font-weight="400" fill="#374151" text-anchor="start" font-family="Inter, Arial, Helvetica, sans-serif"></text>
+<text x="502" y="240" font-size="12.2" font-weight="400" fill="#374151" text-anchor="start" font-family="Inter, Arial, Helvetica, sans-serif">Lint:</text>
+<text x="502" y="257" font-size="11.3" font-weight="400" fill="#374151" text-anchor="start" font-family="ui-monospace, Menlo, Consolas, monospace">ruff check .</text>
+<text x="502" y="274" font-size="11.3" font-weight="400" fill="#374151" text-anchor="start" font-family="ui-monospace, Menlo, Consolas, monospace">ruff format --check .</text>
+<text x="502" y="291" font-size="12.2" font-weight="400" fill="#374151" text-anchor="start" font-family="Inter, Arial, Helvetica, sans-serif"></text>
+<text x="502" y="308" font-size="12.2" font-weight="400" fill="#374151" text-anchor="start" font-family="Inter, Arial, Helvetica, sans-serif">Tests (91, offline, on generated</text>
+<text x="502" y="325" font-size="12.2" font-weight="400" fill="#374151" text-anchor="start" font-family="Inter, Arial, Helvetica, sans-serif">races with known answers):</text>
+<text x="502" y="342" font-size="11.3" font-weight="400" fill="#374151" text-anchor="start" font-family="ui-monospace, Menlo, Consolas, monospace">pytest</text>
+<rect x="780" y="130" width="262" height="110" rx="10" fill="#e3f3e6" stroke="#2f855a" stroke-width="1.6"/>
+<text x="792" y="152" font-size="13.5" font-weight="700" fill="#1f2933" text-anchor="start" font-family="Inter, Arial, Helvetica, sans-serif">Job: docker</text>
+<text x="1030" y="152" font-size="11" font-weight="600" fill="#2f855a" text-anchor="end" font-family="ui-monospace, Menlo, Consolas, monospace">needs test</text>
+<text x="792" y="172" font-size="12.2" font-weight="400" fill="#374151" text-anchor="start" font-family="Inter, Arial, Helvetica, sans-serif">Build the test image (Dockerfile)</text>
+<text x="792" y="189" font-size="12.2" font-weight="400" fill="#374151" text-anchor="start" font-family="Inter, Arial, Helvetica, sans-serif">Run the tests inside the container:</text>
+<text x="792" y="206" font-size="11.3" font-weight="400" fill="#374151" text-anchor="start" font-family="ui-monospace, Menlo, Consolas, monospace">docker run --rm f1pit</text>
+<rect x="780" y="260" width="552" height="140" rx="10" fill="#e3f3e6" stroke="#2f855a" stroke-width="1.6"/>
+<text x="792" y="282" font-size="13.5" font-weight="700" fill="#1f2933" text-anchor="start" font-family="Inter, Arial, Helvetica, sans-serif">Job: dashboard</text>
+<text x="1320" y="282" font-size="11" font-weight="600" fill="#2f855a" text-anchor="end" font-family="ui-monospace, Menlo, Consolas, monospace">needs test</text>
+<text x="792" y="302" font-size="12.2" font-weight="400" fill="#374151" text-anchor="start" font-family="Inter, Arial, Helvetica, sans-serif">Build the dashboard image (Dockerfile.dashboard)</text>
+<text x="792" y="319" font-size="12.2" font-weight="400" fill="#374151" text-anchor="start" font-family="Inter, Arial, Helvetica, sans-serif">Run the app script inside the image (Streamlit AppTest): no exception, no error</text>
+<text x="792" y="336" font-size="12.2" font-weight="400" fill="#374151" text-anchor="start" font-family="Inter, Arial, Helvetica, sans-serif">Start the container; poll the health endpoint until it answers:</text>
+<text x="792" y="353" font-size="11.3" font-weight="400" fill="#374151" text-anchor="start" font-family="ui-monospace, Menlo, Consolas, monospace">GET http://localhost:8501/_stcore/health</text>
+<text x="792" y="370" font-size="12.2" font-weight="400" fill="#374151" text-anchor="start" font-family="Inter, Arial, Helvetica, sans-serif">Check the page is served, then remove the container</text>
+<rect x="1360" y="130" width="262" height="110" rx="10" fill="#e9e2f5" stroke="#6b46c1" stroke-width="1.6"/>
+<text x="1372" y="152" font-size="13.5" font-weight="700" fill="#1f2933" text-anchor="start" font-family="Inter, Arial, Helvetica, sans-serif">Result on GitHub</text>
+<text x="1372" y="172" font-size="12.2" font-weight="400" fill="#374151" text-anchor="start" font-family="Inter, Arial, Helvetica, sans-serif">Green tick or red cross on the</text>
+<text x="1372" y="189" font-size="12.2" font-weight="400" fill="#374151" text-anchor="start" font-family="Inter, Arial, Helvetica, sans-serif">commit and the pull request.</text>
+<text x="1372" y="206" font-size="12.2" font-weight="400" fill="#374151" text-anchor="start" font-family="Inter, Arial, Helvetica, sans-serif">A red cross means the change</text>
+<text x="1372" y="223" font-size="12.2" font-weight="400" fill="#374151" text-anchor="start" font-family="Inter, Arial, Helvetica, sans-serif">is not safe to merge.</text>
+<path d="M462 185 L490 185" fill="none" stroke="#374151" stroke-width="1.8" marker-end="url(#arrow)"/>
+<path d="M752 185 L780 185" fill="none" stroke="#374151" stroke-width="1.8" marker-end="url(#arrow)"/>
+<path d="M752 330 L780 330" fill="none" stroke="#374151" stroke-width="1.8" marker-end="url(#arrow)"/>
+<path d="M1042 185 L1360 185" fill="none" stroke="#374151" stroke-width="1.8" marker-end="url(#arrow)"/>
+<path d="M1332 330 L1491.0 330 L1491.0 240" fill="none" stroke="#374151" stroke-width="1.8" marker-end="url(#arrow)"/>
+<rect x="20" y="450" width="1600" height="200" rx="12" fill="#f6f4fa" stroke="#d5dde6"/>
+<text x="36" y="480" font-size="15" font-weight="700" fill="#1f2933" text-anchor="start" font-family="Inter, Arial, Helvetica, sans-serif">2  Release</text>
+<text x="36" y="500" font-size="12" font-weight="400" fill="#4b5563" text-anchor="start" font-family="Inter, Arial, Helvetica, sans-serif">release.yml: pushing</text>
+<text x="36" y="517" font-size="12" font-weight="400" fill="#4b5563" text-anchor="start" font-family="Inter, Arial, Helvetica, sans-serif">a version tag</text>
+<text x="36" y="534" font-size="12" font-weight="400" fill="#4b5563" text-anchor="start" font-family="Inter, Arial, Helvetica, sans-serif">such as v1.0.0</text>
+<rect x="200" y="480" width="262" height="110" rx="10" fill="#fdf3d8" stroke="#b7791f" stroke-width="1.6"/>
+<text x="212" y="502" font-size="13.5" font-weight="700" fill="#1f2933" text-anchor="start" font-family="Inter, Arial, Helvetica, sans-serif">Developer</text>
+<text x="212" y="522" font-size="11.3" font-weight="400" fill="#374151" text-anchor="start" font-family="ui-monospace, Menlo, Consolas, monospace">git tag v1.0.0</text>
+<text x="212" y="539" font-size="11.3" font-weight="400" fill="#374151" text-anchor="start" font-family="ui-monospace, Menlo, Consolas, monospace">git push origin v1.0.0</text>
+<rect x="490" y="480" width="262" height="110" rx="10" fill="#e3f3e6" stroke="#2f855a" stroke-width="1.6"/>
+<text x="502" y="502" font-size="13.5" font-weight="700" fill="#1f2933" text-anchor="start" font-family="Inter, Arial, Helvetica, sans-serif">Job: test</text>
+<text x="740" y="502" font-size="11" font-weight="600" fill="#2f855a" text-anchor="end" font-family="ui-monospace, Menlo, Consolas, monospace">gate</text>
+<text x="502" y="522" font-size="12.2" font-weight="400" fill="#374151" text-anchor="start" font-family="Inter, Arial, Helvetica, sans-serif">Same install as CI</text>
+<text x="502" y="539" font-size="11.3" font-weight="400" fill="#374151" text-anchor="start" font-family="ui-monospace, Menlo, Consolas, monospace">pytest</text>
+<text x="502" y="556" font-size="12.2" font-weight="400" fill="#374151" text-anchor="start" font-family="Inter, Arial, Helvetica, sans-serif">A failure stops the release</text>
+<rect x="780" y="480" width="262" height="140" rx="10" fill="#e9e2f5" stroke="#6b46c1" stroke-width="1.6"/>
+<text x="792" y="502" font-size="13.5" font-weight="700" fill="#1f2933" text-anchor="start" font-family="Inter, Arial, Helvetica, sans-serif">Job: publish</text>
+<text x="1030" y="502" font-size="11" font-weight="600" fill="#6b46c1" text-anchor="end" font-family="ui-monospace, Menlo, Consolas, monospace">needs test</text>
+<text x="792" y="522" font-size="12.2" font-weight="400" fill="#374151" text-anchor="start" font-family="Inter, Arial, Helvetica, sans-serif">Log in to the registry with the</text>
+<text x="792" y="539" font-size="12.2" font-weight="400" fill="#374151" text-anchor="start" font-family="Inter, Arial, Helvetica, sans-serif">workflow&#x27;s own token</text>
+<text x="792" y="556" font-size="12.2" font-weight="400" fill="#374151" text-anchor="start" font-family="Inter, Arial, Helvetica, sans-serif">Work out the tags from the version</text>
+<text x="792" y="573" font-size="12.2" font-weight="400" fill="#374151" text-anchor="start" font-family="Inter, Arial, Helvetica, sans-serif">Build Dockerfile.dashboard and push</text>
+<rect x="1070" y="480" width="552" height="140" rx="4" fill="#ffffff" stroke="#6b7280" stroke-width="1.6"/>
+<path d="M1606 480 L1622 496 L1606 496 Z" fill="#e5e7eb" stroke="#6b7280" stroke-width="1"/>
+<text x="1082" y="502" font-size="13.5" font-weight="700" fill="#1f2933" text-anchor="start" font-family="Inter, Arial, Helvetica, sans-serif">GitHub Container Registry</text>
+<text x="1082" y="522" font-size="11.3" font-weight="400" fill="#374151" text-anchor="start" font-family="ui-monospace, Menlo, Consolas, monospace">ghcr.io/&lt;owner&gt;/&lt;repo&gt;-dashboard:1.0.0</text>
+<text x="1082" y="539" font-size="12.2" font-weight="400" fill="#374151" text-anchor="start" font-family="Inter, Arial, Helvetica, sans-serif">A plain version also updates latest; a pre-release such as</text>
+<text x="1082" y="556" font-size="12.2" font-weight="400" fill="#374151" text-anchor="start" font-family="Inter, Arial, Helvetica, sans-serif">v1.0.0-rc1 does not.</text>
+<text x="1082" y="573" font-size="12.2" font-weight="400" fill="#374151" text-anchor="start" font-family="Inter, Arial, Helvetica, sans-serif">The first published package is private until its visibility</text>
+<text x="1082" y="590" font-size="12.2" font-weight="400" fill="#374151" text-anchor="start" font-family="Inter, Arial, Helvetica, sans-serif">is changed in the package settings.</text>
+<path d="M462 535 L490 535" fill="none" stroke="#374151" stroke-width="1.8" marker-end="url(#arrow)"/>
+<path d="M752 535 L780 535" fill="none" stroke="#374151" stroke-width="1.8" marker-end="url(#arrow)"/>
+<path d="M1042 535 L1070 535" fill="none" stroke="#374151" stroke-width="1.8" marker-end="url(#arrow)"/>
+<rect x="20" y="670" width="1600" height="250" rx="12" fill="#f6f4fa" stroke="#d5dde6"/>
+<text x="36" y="700" font-size="15" font-weight="700" fill="#1f2933" text-anchor="start" font-family="Inter, Arial, Helvetica, sans-serif">3  Deployment</text>
+<text x="36" y="720" font-size="12" font-weight="400" fill="#4b5563" text-anchor="start" font-family="Inter, Arial, Helvetica, sans-serif">two ways to run</text>
+<text x="36" y="737" font-size="12" font-weight="400" fill="#4b5563" text-anchor="start" font-family="Inter, Arial, Helvetica, sans-serif">the dashboard:</text>
+<text x="36" y="754" font-size="12" font-weight="400" fill="#4b5563" text-anchor="start" font-family="Inter, Arial, Helvetica, sans-serif">from the registry,</text>
+<text x="36" y="771" font-size="12" font-weight="400" fill="#4b5563" text-anchor="start" font-family="Inter, Arial, Helvetica, sans-serif">or from main</text>
+<rect x="200" y="700" width="262" height="190" rx="4" fill="#ffffff" stroke="#6b7280" stroke-width="1.6"/>
+<path d="M446 700 L462 716 L446 716 Z" fill="#e5e7eb" stroke="#6b7280" stroke-width="1"/>
+<text x="212" y="722" font-size="13.5" font-weight="700" fill="#1f2933" text-anchor="start" font-family="Inter, Arial, Helvetica, sans-serif">main branch</text>
+<text x="212" y="742" font-size="11.3" font-weight="400" fill="#374151" text-anchor="start" font-family="ui-monospace, Menlo, Consolas, monospace">app/streamlit_app.py</text>
+<text x="212" y="759" font-size="11.3" font-weight="400" fill="#374151" text-anchor="start" font-family="ui-monospace, Menlo, Consolas, monospace">app/requirements.txt</text>
+<text x="212" y="776" font-size="11.3" font-weight="400" fill="#374151" text-anchor="start" font-family="ui-monospace, Menlo, Consolas, monospace">app/data/  results bundle</text>
+<text x="212" y="793" font-size="12.2" font-weight="400" fill="#374151" text-anchor="start" font-family="Inter, Arial, Helvetica, sans-serif"></text>
+<text x="212" y="810" font-size="12.2" font-weight="400" fill="#374151" text-anchor="start" font-family="Inter, Arial, Helvetica, sans-serif">The bundle is written by</text>
+<text x="212" y="827" font-size="11.3" font-weight="400" fill="#374151" text-anchor="start" font-family="ui-monospace, Menlo, Consolas, monospace">python -m f1pit.dashboard</text>
+<text x="212" y="844" font-size="12.2" font-weight="400" fill="#374151" text-anchor="start" font-family="Inter, Arial, Helvetica, sans-serif">after the final evaluation and</text>
+<text x="212" y="861" font-size="12.2" font-weight="400" fill="#374151" text-anchor="start" font-family="Inter, Arial, Helvetica, sans-serif">committed with the code.</text>
+<rect x="490" y="800" width="262" height="90" rx="10" fill="#eeeeee" stroke="#6b7280" stroke-width="1.6" stroke-dasharray="6 4"/>
+<text x="502" y="822" font-size="13.5" font-weight="700" fill="#1f2933" text-anchor="start" font-family="Inter, Arial, Helvetica, sans-serif">Streamlit Community Cloud</text>
+<text x="502" y="842" font-size="12.2" font-weight="400" fill="#374151" text-anchor="start" font-family="Inter, Arial, Helvetica, sans-serif">Watches the main branch.</text>
+<text x="502" y="859" font-size="12.2" font-weight="400" fill="#374151" text-anchor="start" font-family="Inter, Arial, Helvetica, sans-serif">Installs app/requirements.txt and</text>
+<text x="502" y="876" font-size="12.2" font-weight="400" fill="#374151" text-anchor="start" font-family="Inter, Arial, Helvetica, sans-serif">redeploys on every push.</text>
+<rect x="780" y="800" width="262" height="90" rx="10" fill="#e9e2f5" stroke="#6b46c1" stroke-width="1.6"/>
+<text x="792" y="822" font-size="13.5" font-weight="700" fill="#1f2933" text-anchor="start" font-family="Inter, Arial, Helvetica, sans-serif">Public dashboard</text>
+<text x="792" y="842" font-size="11.3" font-weight="400" fill="#374151" text-anchor="start" font-family="ui-monospace, Menlo, Consolas, monospace">https://&lt;name&gt;.streamlit.app</text>
+<text x="792" y="859" font-size="12.2" font-weight="400" fill="#374151" text-anchor="start" font-family="Inter, Arial, Helvetica, sans-serif">Reads the bundle only; it never</text>
+<text x="792" y="876" font-size="12.2" font-weight="400" fill="#374151" text-anchor="start" font-family="Inter, Arial, Helvetica, sans-serif">trains or scores a model.</text>
+<rect x="1070" y="700" width="262" height="90" rx="10" fill="#eeeeee" stroke="#6b7280" stroke-width="1.6" stroke-dasharray="6 4"/>
+<text x="1082" y="722" font-size="13.5" font-weight="700" fill="#1f2933" text-anchor="start" font-family="Inter, Arial, Helvetica, sans-serif">Any container host</text>
+<text x="1082" y="742" font-size="11.3" font-weight="400" fill="#374151" text-anchor="start" font-family="ui-monospace, Menlo, Consolas, monospace">docker run -p 8501:8501 &lt;image&gt;</text>
+<text x="1082" y="759" font-size="12.2" font-weight="400" fill="#374151" text-anchor="start" font-family="Inter, Arial, Helvetica, sans-serif">Port 8501, non-root user,</text>
+<text x="1082" y="776" font-size="12.2" font-weight="400" fill="#374151" text-anchor="start" font-family="Inter, Arial, Helvetica, sans-serif">health check built in</text>
+<rect x="1360" y="700" width="262" height="90" rx="10" fill="#fdf3d8" stroke="#b7791f" stroke-width="1.6"/>
+<text x="1372" y="722" font-size="13.5" font-weight="700" fill="#1f2933" text-anchor="start" font-family="Inter, Arial, Helvetica, sans-serif">Examiner or visitor</text>
+<text x="1372" y="742" font-size="12.2" font-weight="400" fill="#374151" text-anchor="start" font-family="Inter, Arial, Helvetica, sans-serif">Opens the link in a browser.</text>
+<text x="1372" y="759" font-size="12.2" font-weight="400" fill="#374151" text-anchor="start" font-family="Inter, Arial, Helvetica, sans-serif">Nothing to install.</text>
+<path d="M462 845 L490 845" fill="none" stroke="#374151" stroke-width="1.8" marker-end="url(#arrow)"/>
+<path d="M752 845 L780 845" fill="none" stroke="#374151" stroke-width="1.8" marker-end="url(#arrow)"/>
+<path d="M1042 845 L1491.0 845 L1491.0 790" fill="none" stroke="#374151" stroke-width="1.8" marker-end="url(#arrow)"/>
+<path d="M1332 745 L1360 745" fill="none" stroke="#374151" stroke-width="1.8" marker-end="url(#arrow)"/>
+<path d="M1201.0 620 L1201.0 700" fill="none" stroke="#374151" stroke-width="1.8" marker-end="url(#arrow)" stroke-dasharray="5 4"/>
+<text x="1211.0" y="648" font-size="11.5" font-weight="500" fill="#4b5563" text-anchor="start" font-family="Inter, Arial, Helvetica, sans-serif">pull the published image</text>
+<text x="476" y="770" font-size="11.5" font-weight="500" fill="#4b5563" text-anchor="start" font-family="Inter, Arial, Helvetica, sans-serif">push to main</text>
+<text x="30" y="959" font-size="13.5" font-weight="700" fill="#1f2933" text-anchor="start" font-family="Inter, Arial, Helvetica, sans-serif">Key</text>
+<rect x="90" y="945" width="30" height="18" rx="5" fill="#e3f3e6" stroke="#2f855a" stroke-width="1.5"/>
+<text x="130" y="959" font-size="12.2" font-weight="400" fill="#374151" text-anchor="start" font-family="Inter, Arial, Helvetica, sans-serif">Quality gate</text>
+<rect x="236.4" y="945" width="30" height="18" rx="5" fill="#e9e2f5" stroke="#6b46c1" stroke-width="1.5"/>
+<text x="276.4" y="959" font-size="12.2" font-weight="400" fill="#374151" text-anchor="start" font-family="Inter, Arial, Helvetica, sans-serif">Automation and hosting</text>
+<rect x="454.8" y="945" width="30" height="18" rx="2" fill="#ffffff" stroke="#6b7280" stroke-width="1.5"/>
+<text x="494.8" y="959" font-size="12.2" font-weight="400" fill="#374151" text-anchor="start" font-family="Inter, Arial, Helvetica, sans-serif">Saved file or folder</text>
+<rect x="658.8" y="945" width="30" height="18" rx="5" fill="#eeeeee" stroke="#6b7280" stroke-width="1.5" stroke-dasharray="6 4"/>
+<text x="698.8" y="959" font-size="12.2" font-weight="400" fill="#374151" text-anchor="start" font-family="Inter, Arial, Helvetica, sans-serif">External service</text>
+<rect x="834.0" y="945" width="30" height="18" rx="5" fill="#fdf3d8" stroke="#b7791f" stroke-width="1.5"/>
+<text x="874.0" y="959" font-size="12.2" font-weight="400" fill="#374151" text-anchor="start" font-family="Inter, Arial, Helvetica, sans-serif">People</text>
+<text x="30" y="989" font-size="12.2" font-weight="400" fill="#374151" text-anchor="start" font-family="Inter, Arial, Helvetica, sans-serif">Not automated on purpose: model training and the final test. They are run by hand, once, so the test seasons are scored a known number of times.</text>
+</svg>

@@ -1,0 +1,222 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1640 1290" width="1640" height="1290">
+<defs><marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse"><path d="M0 0 L10 5 L0 10 Z" fill="#374151"/></marker></defs>
+<rect width="1640" height="1290" fill="#ffffff"/>
+<text x="30" y="44" font-size="23" font-weight="700" fill="#1f2933" text-anchor="start" font-family="Inter, Arial, Helvetica, sans-serif">F1 Tyre-Aware Pit Stop Engine: data pipeline</text>
+<text x="30" y="68" font-size="13.5" font-weight="400" fill="#4b5563" text-anchor="start" font-family="Inter, Arial, Helvetica, sans-serif">How a lap travels from the timing source to the tables the models and the dashboard read. Counts are from the full run on real data (5 October 2026).</text>
+<rect x="20" y="100" width="1600" height="230" rx="12" fill="#f3f7fb" stroke="#d5dde6"/>
+<text x="36" y="130" font-size="15" font-weight="700" fill="#1f2933" text-anchor="start" font-family="Inter, Arial, Helvetica, sans-serif">1  Collect</text>
+<text x="36" y="150" font-size="12" font-weight="400" fill="#4b5563" text-anchor="start" font-family="Inter, Arial, Helvetica, sans-serif">python -m f1pit.ingest</text>
+<rect x="200" y="130" width="262" height="80" rx="10" fill="#eeeeee" stroke="#6b7280" stroke-width="1.6" stroke-dasharray="6 4"/>
+<text x="212" y="152" font-size="13.5" font-weight="700" fill="#1f2933" text-anchor="start" font-family="Inter, Arial, Helvetica, sans-serif">FastF1</text>
+<text x="212" y="172" font-size="12.2" font-weight="400" fill="#374151" text-anchor="start" font-family="Inter, Arial, Helvetica, sans-serif">Formula 1 timing service</text>
+<text x="212" y="189" font-size="12.2" font-weight="400" fill="#374151" text-anchor="start" font-family="Inter, Arial, Helvetica, sans-serif">Tried first for every race</text>
+<rect x="200" y="220" width="262" height="80" rx="10" fill="#eeeeee" stroke="#6b7280" stroke-width="1.6" stroke-dasharray="6 4"/>
+<text x="212" y="242" font-size="13.5" font-weight="700" fill="#1f2933" text-anchor="start" font-family="Inter, Arial, Helvetica, sans-serif">TracingInsights archive</text>
+<text x="212" y="262" font-size="12.2" font-weight="400" fill="#374151" text-anchor="start" font-family="Inter, Arial, Helvetica, sans-serif">FastF1 lap tables on GitHub</text>
+<text x="212" y="279" font-size="12.2" font-weight="400" fill="#374151" text-anchor="start" font-family="Inter, Arial, Helvetica, sans-serif">Used when FastF1 returns nothing</text>
+<rect x="490" y="130" width="262" height="170" rx="10" fill="#dbe9f6" stroke="#2b6cb0" stroke-width="1.6"/>
+<text x="502" y="152" font-size="13.5" font-weight="700" fill="#1f2933" text-anchor="start" font-family="Inter, Arial, Helvetica, sans-serif">Ingest</text>
+<text x="740" y="152" font-size="11" font-weight="600" fill="#2b6cb0" text-anchor="end" font-family="ui-monospace, Menlo, Consolas, monospace">ingest</text>
+<text x="502" y="172" font-size="12.2" font-weight="400" fill="#374151" text-anchor="start" font-family="Inter, Arial, Helvetica, sans-serif">Season schedule: completed</text>
+<text x="502" y="189" font-size="12.2" font-weight="400" fill="#374151" text-anchor="start" font-family="Inter, Arial, Helvetica, sans-serif">races only</text>
+<text x="502" y="206" font-size="12.2" font-weight="400" fill="#374151" text-anchor="start" font-family="Inter, Arial, Helvetica, sans-serif">One race at a time; a saved</text>
+<text x="502" y="223" font-size="12.2" font-weight="400" fill="#374151" text-anchor="start" font-family="Inter, Arial, Helvetica, sans-serif">race is never downloaded again</text>
+<text x="502" y="240" font-size="12.2" font-weight="400" fill="#374151" text-anchor="start" font-family="Inter, Arial, Helvetica, sans-serif">FastF1 skipped after 3 failures</text>
+<text x="502" y="257" font-size="12.2" font-weight="400" fill="#374151" text-anchor="start" font-family="Inter, Arial, Helvetica, sans-serif">in a row</text>
+<text x="502" y="274" font-size="12.2" font-weight="400" fill="#374151" text-anchor="start" font-family="Inter, Arial, Helvetica, sans-serif">Missing races are listed</text>
+<rect x="780" y="130" width="262" height="170" rx="4" fill="#ffffff" stroke="#6b7280" stroke-width="1.6"/>
+<path d="M1026 130 L1042 146 L1026 146 Z" fill="#e5e7eb" stroke="#6b7280" stroke-width="1"/>
+<text x="792" y="152" font-size="13.5" font-weight="700" fill="#1f2933" text-anchor="start" font-family="Inter, Arial, Helvetica, sans-serif">Raw laps</text>
+<text x="792" y="172" font-size="11.3" font-weight="400" fill="#374151" text-anchor="start" font-family="ui-monospace, Menlo, Consolas, monospace">data/races/2024_01.parquet</text>
+<text x="792" y="189" font-size="12.2" font-weight="400" fill="#374151" text-anchor="start" font-family="Inter, Arial, Helvetica, sans-serif">one file per race, one row per</text>
+<text x="792" y="206" font-size="12.2" font-weight="400" fill="#374151" text-anchor="start" font-family="Inter, Arial, Helvetica, sans-serif">lap and driver</text>
+<text x="792" y="223" font-size="12.2" font-weight="400" fill="#374151" text-anchor="start" font-family="Inter, Arial, Helvetica, sans-serif"></text>
+<text x="792" y="240" font-size="12.2" font-weight="400" fill="#374151" text-anchor="start" font-family="Inter, Arial, Helvetica, sans-serif">96 races, 105,375 laps</text>
+<text x="792" y="257" font-size="12.2" font-weight="400" fill="#374151" text-anchor="start" font-family="Inter, Arial, Helvetica, sans-serif">26 columns, 3 MB</text>
+<text x="792" y="274" font-size="11.3" font-weight="400" fill="#374151" text-anchor="start" font-family="ui-monospace, Menlo, Consolas, monospace">ingest_failures.json</text>
+<rect x="1070" y="130" width="552" height="170" rx="4" fill="#ffffff" stroke="#6b7280" stroke-width="1.6"/>
+<path d="M1606 130 L1622 146 L1606 146 Z" fill="#e5e7eb" stroke="#6b7280" stroke-width="1"/>
+<text x="1082" y="152" font-size="13.5" font-weight="700" fill="#1f2933" text-anchor="start" font-family="Inter, Arial, Helvetica, sans-serif">Columns of a raw lap</text>
+<text x="1082" y="172" font-size="12.2" font-weight="400" fill="#374151" text-anchor="start" font-family="Inter, Arial, Helvetica, sans-serif">Who and when:  Driver, Team, Year, Round, EventName, LapNumber</text>
+<text x="1082" y="189" font-size="12.2" font-weight="400" fill="#374151" text-anchor="start" font-family="Inter, Arial, Helvetica, sans-serif">Time:  LapTime_s, Time_s (session clock), PitInTime_s, PitOutTime_s</text>
+<text x="1082" y="206" font-size="12.2" font-weight="400" fill="#374151" text-anchor="start" font-family="Inter, Arial, Helvetica, sans-serif">Tyres:  Compound, TyreLife, Stint, FreshTyre</text>
+<text x="1082" y="223" font-size="12.2" font-weight="400" fill="#374151" text-anchor="start" font-family="Inter, Arial, Helvetica, sans-serif">Race state:  Position, TrackStatus (safety car, flags)</text>
+<text x="1082" y="240" font-size="12.2" font-weight="400" fill="#374151" text-anchor="start" font-family="Inter, Arial, Helvetica, sans-serif">Weather:  AirTemp, TrackTemp, Humidity, Rainfall</text>
+<text x="1082" y="257" font-size="12.2" font-weight="400" fill="#374151" text-anchor="start" font-family="Inter, Arial, Helvetica, sans-serif">Quality flags:  IsAccurate, Deleted, FastF1Generated</text>
+<text x="1082" y="274" font-size="12.2" font-weight="400" fill="#374151" text-anchor="start" font-family="Inter, Arial, Helvetica, sans-serif">Origin:  Source (fastf1 or tracinginsights), ScheduledLaps</text>
+<path d="M462 170 L490 170" fill="none" stroke="#374151" stroke-width="1.8" marker-end="url(#arrow)"/>
+<path d="M462 260 L490 260" fill="none" stroke="#374151" stroke-width="1.8" marker-end="url(#arrow)" stroke-dasharray="5 4"/>
+<path d="M752 215 L780 215" fill="none" stroke="#374151" stroke-width="1.8" marker-end="url(#arrow)"/>
+<path d="M1042 215 L1070 215" fill="none" stroke="#374151" stroke-width="1.8" marker-end="url(#arrow)" stroke-dasharray="5 4"/>
+<rect x="20" y="350" width="1600" height="260" rx="12" fill="#f3f7fb" stroke="#d5dde6"/>
+<text x="36" y="380" font-size="15" font-weight="700" fill="#1f2933" text-anchor="start" font-family="Inter, Arial, Helvetica, sans-serif">2  Clean and label</text>
+<text x="36" y="400" font-size="12" font-weight="400" fill="#4b5563" text-anchor="start" font-family="Inter, Arial, Helvetica, sans-serif">python -m f1pit.clean</text>
+<rect x="200" y="380" width="262" height="200" rx="10" fill="#e3f3e6" stroke="#2f855a" stroke-width="1.6"/>
+<text x="212" y="402" font-size="13.5" font-weight="700" fill="#1f2933" text-anchor="start" font-family="Inter, Arial, Helvetica, sans-serif">Integrity check</text>
+<text x="450" y="402" font-size="11" font-weight="600" fill="#2f855a" text-anchor="end" font-family="ui-monospace, Menlo, Consolas, monospace">gate</text>
+<text x="212" y="422" font-size="12.2" font-weight="400" fill="#374151" text-anchor="start" font-family="Inter, Arial, Helvetica, sans-serif">Two races with the same drivers,</text>
+<text x="212" y="439" font-size="12.2" font-weight="400" fill="#374151" text-anchor="start" font-family="Inter, Arial, Helvetica, sans-serif">tyres and positions on every</text>
+<text x="212" y="456" font-size="12.2" font-weight="400" fill="#374151" text-anchor="start" font-family="Inter, Arial, Helvetica, sans-serif">lap are copies: the step stops</text>
+<text x="212" y="473" font-size="12.2" font-weight="400" fill="#374151" text-anchor="start" font-family="Inter, Arial, Helvetica, sans-serif"></text>
+<text x="212" y="490" font-size="12.2" font-weight="400" fill="#374151" text-anchor="start" font-family="Inter, Arial, Helvetica, sans-serif">0 copies in 96 races</text>
+<rect x="490" y="380" width="262" height="200" rx="10" fill="#dbe9f6" stroke="#2b6cb0" stroke-width="1.6"/>
+<text x="502" y="402" font-size="13.5" font-weight="700" fill="#1f2933" text-anchor="start" font-family="Inter, Arial, Helvetica, sans-serif">Filters</text>
+<text x="740" y="402" font-size="11" font-weight="600" fill="#2b6cb0" text-anchor="end" font-family="ui-monospace, Menlo, Consolas, monospace">clean</text>
+<text x="502" y="422" font-size="12.2" font-weight="400" fill="#374151" text-anchor="start" font-family="Inter, Arial, Helvetica, sans-serif">Wet races removed whole:</text>
+<text x="502" y="439" font-size="12.2" font-weight="400" fill="#374151" text-anchor="start" font-family="Inter, Arial, Helvetica, sans-serif">12 races, 12,621 laps</text>
+<text x="502" y="456" font-size="12.2" font-weight="400" fill="#374151" text-anchor="start" font-family="Inter, Arial, Helvetica, sans-serif">Laps on wet-weather tyres or</text>
+<text x="502" y="473" font-size="12.2" font-weight="400" fill="#374151" text-anchor="start" font-family="Inter, Arial, Helvetica, sans-serif">with no compound: 780</text>
+<text x="502" y="490" font-size="12.2" font-weight="400" fill="#374151" text-anchor="start" font-family="Inter, Arial, Helvetica, sans-serif">Laps FastF1 had to generate: 125</text>
+<text x="502" y="507" font-size="12.2" font-weight="400" fill="#374151" text-anchor="start" font-family="Inter, Arial, Helvetica, sans-serif">Laps with no tyre age: 91</text>
+<text x="502" y="524" font-size="12.2" font-weight="400" fill="#374151" text-anchor="start" font-family="Inter, Arial, Helvetica, sans-serif"></text>
+<text x="502" y="541" font-size="12.2" font-weight="400" fill="#374151" text-anchor="start" font-family="Inter, Arial, Helvetica, sans-serif">Left: 84 races, 91,758 laps</text>
+<rect x="780" y="380" width="262" height="200" rx="10" fill="#dbe9f6" stroke="#2b6cb0" stroke-width="1.6"/>
+<text x="792" y="402" font-size="13.5" font-weight="700" fill="#1f2933" text-anchor="start" font-family="Inter, Arial, Helvetica, sans-serif">Pit-lap label</text>
+<text x="1030" y="402" font-size="11" font-weight="600" fill="#2b6cb0" text-anchor="end" font-family="ui-monospace, Menlo, Consolas, monospace">clean</text>
+<text x="792" y="422" font-size="12.2" font-weight="400" fill="#374151" text-anchor="start" font-family="Inter, Arial, Helvetica, sans-serif">2,901 pit entries followed by</text>
+<text x="792" y="439" font-size="12.2" font-weight="400" fill="#374151" text-anchor="start" font-family="Inter, Arial, Helvetica, sans-serif">another lap</text>
+<text x="792" y="456" font-size="12.2" font-weight="400" fill="#374151" text-anchor="start" font-family="Inter, Arial, Helvetica, sans-serif">Not counted as a stop:</text>
+<text x="792" y="473" font-size="12.2" font-weight="400" fill="#374151" text-anchor="start" font-family="Inter, Arial, Helvetica, sans-serif">208 with no tyre change</text>
+<text x="792" y="490" font-size="12.2" font-weight="400" fill="#374151" text-anchor="start" font-family="Inter, Arial, Helvetica, sans-serif">103 while the race was suspended</text>
+<text x="792" y="507" font-size="12.2" font-weight="400" fill="#374151" text-anchor="start" font-family="Inter, Arial, Helvetica, sans-serif"></text>
+<text x="792" y="524" font-size="12.2" font-weight="400" fill="#374151" text-anchor="start" font-family="Inter, Arial, Helvetica, sans-serif">2,590 pit laps (2.8% of laps)</text>
+<rect x="1070" y="380" width="262" height="200" rx="10" fill="#dbe9f6" stroke="#2b6cb0" stroke-width="1.6"/>
+<text x="1082" y="402" font-size="13.5" font-weight="700" fill="#1f2933" text-anchor="start" font-family="Inter, Arial, Helvetica, sans-serif">Race context</text>
+<text x="1320" y="402" font-size="11" font-weight="600" fill="#2b6cb0" text-anchor="end" font-family="ui-monospace, Menlo, Consolas, monospace">clean</text>
+<text x="1082" y="422" font-size="12.2" font-weight="400" fill="#374151" text-anchor="start" font-family="Inter, Arial, Helvetica, sans-serif">RaceProgress, LapsRemaining</text>
+<text x="1082" y="439" font-size="12.2" font-weight="400" fill="#374151" text-anchor="start" font-family="Inter, Arial, Helvetica, sans-serif">(scheduled distance when known)</text>
+<text x="1082" y="456" font-size="12.2" font-weight="400" fill="#374151" text-anchor="start" font-family="Inter, Arial, Helvetica, sans-serif">SafetyCar flag: 5,874 laps</text>
+<text x="1082" y="473" font-size="12.2" font-weight="400" fill="#374151" text-anchor="start" font-family="Inter, Arial, Helvetica, sans-serif">RuleForced flag: 3 races</text>
+<text x="1082" y="490" font-size="12.2" font-weight="400" fill="#374151" text-anchor="start" font-family="Inter, Arial, Helvetica, sans-serif">Split: train, validation, test,</text>
+<text x="1082" y="507" font-size="12.2" font-weight="400" fill="#374151" text-anchor="start" font-family="Inter, Arial, Helvetica, sans-serif">extra test, by season</text>
+<rect x="1360" y="380" width="262" height="200" rx="4" fill="#ffffff" stroke="#6b7280" stroke-width="1.6"/>
+<path d="M1606 380 L1622 396 L1606 396 Z" fill="#e5e7eb" stroke="#6b7280" stroke-width="1"/>
+<text x="1372" y="402" font-size="13.5" font-weight="700" fill="#1f2933" text-anchor="start" font-family="Inter, Arial, Helvetica, sans-serif">Clean laps</text>
+<text x="1372" y="422" font-size="11.3" font-weight="400" fill="#374151" text-anchor="start" font-family="ui-monospace, Menlo, Consolas, monospace">data/processed/</text>
+<text x="1372" y="439" font-size="11.3" font-weight="400" fill="#374151" text-anchor="start" font-family="ui-monospace, Menlo, Consolas, monospace">laps_clean.parquet</text>
+<text x="1372" y="456" font-size="12.2" font-weight="400" fill="#374151" text-anchor="start" font-family="Inter, Arial, Helvetica, sans-serif"></text>
+<text x="1372" y="473" font-size="12.2" font-weight="400" fill="#374151" text-anchor="start" font-family="Inter, Arial, Helvetica, sans-serif">91,758 laps, 35 columns</text>
+<text x="1372" y="490" font-size="12.2" font-weight="400" fill="#374151" text-anchor="start" font-family="Inter, Arial, Helvetica, sans-serif">1.4 MB</text>
+<path d="M911.0 300 L911.0 338 L331.0 338 L331.0 380" fill="none" stroke="#374151" stroke-width="1.8" marker-end="url(#arrow)"/>
+<text x="621.0" y="333" font-size="11.5" font-weight="500" fill="#4b5563" text-anchor="middle" font-family="Inter, Arial, Helvetica, sans-serif">raw laps</text>
+<path d="M462 480 L490 480" fill="none" stroke="#374151" stroke-width="1.8" marker-end="url(#arrow)"/>
+<path d="M752 480 L780 480" fill="none" stroke="#374151" stroke-width="1.8" marker-end="url(#arrow)"/>
+<path d="M1042 480 L1070 480" fill="none" stroke="#374151" stroke-width="1.8" marker-end="url(#arrow)"/>
+<path d="M1332 480 L1360 480" fill="none" stroke="#374151" stroke-width="1.8" marker-end="url(#arrow)"/>
+<rect x="20" y="630" width="1600" height="260" rx="12" fill="#f3f7fb" stroke="#d5dde6"/>
+<text x="36" y="660" font-size="15" font-weight="700" fill="#1f2933" text-anchor="start" font-family="Inter, Arial, Helvetica, sans-serif">3  Enrich</text>
+<text x="36" y="680" font-size="12" font-weight="400" fill="#4b5563" text-anchor="start" font-family="Inter, Arial, Helvetica, sans-serif">python -m f1pit.features</text>
+<text x="36" y="697" font-size="12" font-weight="400" fill="#4b5563" text-anchor="start" font-family="Inter, Arial, Helvetica, sans-serif">python -m f1pit.stage1</text>
+<rect x="200" y="660" width="262" height="200" rx="10" fill="#dbe9f6" stroke="#2b6cb0" stroke-width="1.6"/>
+<text x="212" y="682" font-size="13.5" font-weight="700" fill="#1f2933" text-anchor="start" font-family="Inter, Arial, Helvetica, sans-serif">Fuel correction</text>
+<text x="450" y="682" font-size="11" font-weight="600" fill="#2b6cb0" text-anchor="end" font-family="ui-monospace, Menlo, Consolas, monospace">features</text>
+<text x="212" y="702" font-size="12.2" font-weight="400" fill="#374151" text-anchor="start" font-family="Inter, Arial, Helvetica, sans-serif">A car gets faster as fuel burns.</text>
+<text x="212" y="719" font-size="12.2" font-weight="400" fill="#374151" text-anchor="start" font-family="Inter, Arial, Helvetica, sans-serif">Slope per circuit fitted on</text>
+<text x="212" y="736" font-size="12.2" font-weight="400" fill="#374151" text-anchor="start" font-family="Inter, Arial, Helvetica, sans-serif">training races only (37 races),</text>
+<text x="212" y="753" font-size="12.2" font-weight="400" fill="#374151" text-anchor="start" font-family="Inter, Arial, Helvetica, sans-serif">median -0.055 s per lap</text>
+<text x="212" y="770" font-size="12.2" font-weight="400" fill="#374151" text-anchor="start" font-family="Inter, Arial, Helvetica, sans-serif">Applied unchanged to the</text>
+<text x="212" y="787" font-size="12.2" font-weight="400" fill="#374151" text-anchor="start" font-family="Inter, Arial, Helvetica, sans-serif">other seasons</text>
+<text x="212" y="804" font-size="11.3" font-weight="400" fill="#374151" text-anchor="start" font-family="ui-monospace, Menlo, Consolas, monospace">fuel_slopes.json</text>
+<rect x="490" y="660" width="262" height="200" rx="10" fill="#dbe9f6" stroke="#2b6cb0" stroke-width="1.6"/>
+<text x="502" y="682" font-size="13.5" font-weight="700" fill="#1f2933" text-anchor="start" font-family="Inter, Arial, Helvetica, sans-serif">Degradation</text>
+<text x="740" y="682" font-size="11" font-weight="600" fill="#2b6cb0" text-anchor="end" font-family="ui-monospace, Menlo, Consolas, monospace">features</text>
+<text x="502" y="702" font-size="12.2" font-weight="400" fill="#374151" text-anchor="start" font-family="Inter, Arial, Helvetica, sans-serif">Clean lap: accurate, not deleted,</text>
+<text x="502" y="719" font-size="12.2" font-weight="400" fill="#374151" text-anchor="start" font-family="Inter, Arial, Helvetica, sans-serif">no safety car (79,024 laps)</text>
+<text x="502" y="736" font-size="12.2" font-weight="400" fill="#374151" text-anchor="start" font-family="Inter, Arial, Helvetica, sans-serif">Degradation = corrected lap</text>
+<text x="502" y="753" font-size="12.2" font-weight="400" fill="#374151" text-anchor="start" font-family="Inter, Arial, Helvetica, sans-serif">time minus the average of the</text>
+<text x="502" y="770" font-size="12.2" font-weight="400" fill="#374151" text-anchor="start" font-family="Inter, Arial, Helvetica, sans-serif">stint&#x27;s first 3 clean laps</text>
+<rect x="780" y="660" width="262" height="200" rx="10" fill="#dbe9f6" stroke="#2b6cb0" stroke-width="1.6"/>
+<text x="792" y="682" font-size="13.5" font-weight="700" fill="#1f2933" text-anchor="start" font-family="Inter, Arial, Helvetica, sans-serif">Lag and rival features</text>
+<text x="1030" y="682" font-size="11" font-weight="600" fill="#2b6cb0" text-anchor="end" font-family="ui-monospace, Menlo, Consolas, monospace">features</text>
+<text x="792" y="702" font-size="12.2" font-weight="400" fill="#374151" text-anchor="start" font-family="Inter, Arial, Helvetica, sans-serif">Previous lap&#x27;s degradation,</text>
+<text x="792" y="719" font-size="12.2" font-weight="400" fill="#374151" text-anchor="start" font-family="Inter, Arial, Helvetica, sans-serif">position and time</text>
+<text x="792" y="736" font-size="12.2" font-weight="400" fill="#374151" text-anchor="start" font-family="Inter, Arial, Helvetica, sans-serif">Average degradation, last 3 laps</text>
+<text x="792" y="753" font-size="12.2" font-weight="400" fill="#374151" text-anchor="start" font-family="Inter, Arial, Helvetica, sans-serif">Gap to the car ahead, and</text>
+<text x="792" y="770" font-size="12.2" font-weight="400" fill="#374151" text-anchor="start" font-family="Inter, Arial, Helvetica, sans-serif">whether it pitted</text>
+<text x="792" y="787" font-size="12.2" font-weight="400" fill="#374151" text-anchor="start" font-family="Inter, Arial, Helvetica, sans-serif">Never the current lap&#x27;s own</text>
+<text x="792" y="804" font-size="12.2" font-weight="400" fill="#374151" text-anchor="start" font-family="Inter, Arial, Helvetica, sans-serif">time or position</text>
+<rect x="1070" y="660" width="262" height="200" rx="10" fill="#dbe9f6" stroke="#2b6cb0" stroke-width="1.6"/>
+<text x="1082" y="682" font-size="13.5" font-weight="700" fill="#1f2933" text-anchor="start" font-family="Inter, Arial, Helvetica, sans-serif">Stage 1 forecast</text>
+<text x="1320" y="682" font-size="11" font-weight="600" fill="#2b6cb0" text-anchor="end" font-family="ui-monospace, Menlo, Consolas, monospace">stage1</text>
+<text x="1082" y="702" font-size="12.2" font-weight="400" fill="#374151" text-anchor="start" font-family="Inter, Arial, Helvetica, sans-serif">LapsToThreshold: laps until</text>
+<text x="1082" y="719" font-size="12.2" font-weight="400" fill="#374151" text-anchor="start" font-family="Inter, Arial, Helvetica, sans-serif">pace loss passes 1.0 s</text>
+<text x="1082" y="736" font-size="12.2" font-weight="400" fill="#374151" text-anchor="start" font-family="Inter, Arial, Helvetica, sans-serif">Capped at 40 laps (41% of laps)</text>
+<text x="1082" y="753" font-size="12.2" font-weight="400" fill="#374151" text-anchor="start" font-family="Inter, Arial, Helvetica, sans-serif">Training races: out-of-fold</text>
+<text x="1082" y="770" font-size="12.2" font-weight="400" fill="#374151" text-anchor="start" font-family="Inter, Arial, Helvetica, sans-serif">(39,880 laps); other seasons:</text>
+<text x="1082" y="787" font-size="12.2" font-weight="400" fill="#374151" text-anchor="start" font-family="Inter, Arial, Helvetica, sans-serif">model fitted on training races</text>
+<rect x="1360" y="660" width="262" height="200" rx="4" fill="#ffffff" stroke="#6b7280" stroke-width="1.6"/>
+<path d="M1606 660 L1622 676 L1606 676 Z" fill="#e5e7eb" stroke="#6b7280" stroke-width="1"/>
+<text x="1372" y="682" font-size="13.5" font-weight="700" fill="#1f2933" text-anchor="start" font-family="Inter, Arial, Helvetica, sans-serif">Model table</text>
+<text x="1372" y="702" font-size="11.3" font-weight="400" fill="#374151" text-anchor="start" font-family="ui-monospace, Menlo, Consolas, monospace">features_stage1.parquet</text>
+<text x="1372" y="719" font-size="12.2" font-weight="400" fill="#374151" text-anchor="start" font-family="Inter, Arial, Helvetica, sans-serif"></text>
+<text x="1372" y="736" font-size="12.2" font-weight="400" fill="#374151" text-anchor="start" font-family="Inter, Arial, Helvetica, sans-serif">91,758 laps, 58 columns</text>
+<text x="1372" y="753" font-size="12.2" font-weight="400" fill="#374151" text-anchor="start" font-family="Inter, Arial, Helvetica, sans-serif">8.4 MB</text>
+<text x="1372" y="770" font-size="12.2" font-weight="400" fill="#374151" text-anchor="start" font-family="Inter, Arial, Helvetica, sans-serif">15 model inputs</text>
+<text x="1372" y="787" font-size="12.2" font-weight="400" fill="#374151" text-anchor="start" font-family="Inter, Arial, Helvetica, sans-serif">+ LapsToThreshold</text>
+<text x="1372" y="804" font-size="12.2" font-weight="400" fill="#374151" text-anchor="start" font-family="Inter, Arial, Helvetica, sans-serif">+ PitLap (the label)</text>
+<path d="M1491.0 580 L1491.0 618 L331.0 618 L331.0 660" fill="none" stroke="#374151" stroke-width="1.8" marker-end="url(#arrow)"/>
+<text x="911.0" y="613" font-size="11.5" font-weight="500" fill="#4b5563" text-anchor="middle" font-family="Inter, Arial, Helvetica, sans-serif">clean laps</text>
+<path d="M462 760 L490 760" fill="none" stroke="#374151" stroke-width="1.8" marker-end="url(#arrow)"/>
+<path d="M752 760 L780 760" fill="none" stroke="#374151" stroke-width="1.8" marker-end="url(#arrow)"/>
+<path d="M1042 760 L1070 760" fill="none" stroke="#374151" stroke-width="1.8" marker-end="url(#arrow)"/>
+<path d="M1332 760 L1360 760" fill="none" stroke="#374151" stroke-width="1.8" marker-end="url(#arrow)"/>
+<rect x="20" y="910" width="1600" height="230" rx="12" fill="#f3f7fb" stroke="#d5dde6"/>
+<text x="36" y="940" font-size="15" font-weight="700" fill="#1f2933" text-anchor="start" font-family="Inter, Arial, Helvetica, sans-serif">4  Serve</text>
+<text x="36" y="960" font-size="12" font-weight="400" fill="#4b5563" text-anchor="start" font-family="Inter, Arial, Helvetica, sans-serif">who reads the</text>
+<text x="36" y="977" font-size="12" font-weight="400" fill="#4b5563" text-anchor="start" font-family="Inter, Arial, Helvetica, sans-serif">model table</text>
+<rect x="200" y="940" width="262" height="170" rx="10" fill="#dbe9f6" stroke="#2b6cb0" stroke-width="1.6"/>
+<text x="212" y="962" font-size="13.5" font-weight="700" fill="#1f2933" text-anchor="start" font-family="Inter, Arial, Helvetica, sans-serif">Stage 2 training</text>
+<text x="450" y="962" font-size="11" font-weight="600" fill="#2b6cb0" text-anchor="end" font-family="ui-monospace, Menlo, Consolas, monospace">stage2</text>
+<text x="212" y="982" font-size="12.2" font-weight="400" fill="#374151" text-anchor="start" font-family="Inter, Arial, Helvetica, sans-serif">Windows of the last 10 laps of</text>
+<text x="212" y="999" font-size="12.2" font-weight="400" fill="#374151" text-anchor="start" font-family="Inter, Arial, Helvetica, sans-serif">one driver in one race</text>
+<text x="212" y="1016" font-size="12.2" font-weight="400" fill="#374151" text-anchor="start" font-family="Inter, Arial, Helvetica, sans-serif">Scaled with training statistics</text>
+<text x="212" y="1033" font-size="12.2" font-weight="400" fill="#374151" text-anchor="start" font-family="Inter, Arial, Helvetica, sans-serif">Train 37 races (the rule-forced</text>
+<text x="212" y="1050" font-size="12.2" font-weight="400" fill="#374151" text-anchor="start" font-family="Inter, Arial, Helvetica, sans-serif">race is left out); validate 21</text>
+<rect x="490" y="940" width="262" height="170" rx="10" fill="#e3f3e6" stroke="#2f855a" stroke-width="1.6"/>
+<text x="502" y="962" font-size="13.5" font-weight="700" fill="#1f2933" text-anchor="start" font-family="Inter, Arial, Helvetica, sans-serif">Final test</text>
+<text x="740" y="962" font-size="11" font-weight="600" fill="#2f855a" text-anchor="end" font-family="ui-monospace, Menlo, Consolas, monospace">evaluate</text>
+<text x="502" y="982" font-size="12.2" font-weight="400" fill="#374151" text-anchor="start" font-family="Inter, Arial, Helvetica, sans-serif">Test: 21 races, 23,591 laps</text>
+<text x="502" y="999" font-size="12.2" font-weight="400" fill="#374151" text-anchor="start" font-family="Inter, Arial, Helvetica, sans-serif">Extra test: 4 races, 4,067 laps</text>
+<text x="502" y="1016" font-size="12.2" font-weight="400" fill="#374151" text-anchor="start" font-family="Inter, Arial, Helvetica, sans-serif">Read once the models are frozen</text>
+<text x="502" y="1033" font-size="11.3" font-weight="400" fill="#374151" text-anchor="start" font-family="ui-monospace, Menlo, Consolas, monospace">final_predictions.parquet</text>
+<rect x="780" y="940" width="262" height="170" rx="10" fill="#dbe9f6" stroke="#2b6cb0" stroke-width="1.6"/>
+<text x="792" y="962" font-size="13.5" font-weight="700" fill="#1f2933" text-anchor="start" font-family="Inter, Arial, Helvetica, sans-serif">Report pack</text>
+<text x="1030" y="962" font-size="11" font-weight="600" fill="#2b6cb0" text-anchor="end" font-family="ui-monospace, Menlo, Consolas, monospace">report</text>
+<text x="792" y="982" font-size="12.2" font-weight="400" fill="#374151" text-anchor="start" font-family="Inter, Arial, Helvetica, sans-serif">Table 1: races, laps and pit</text>
+<text x="792" y="999" font-size="12.2" font-weight="400" fill="#374151" text-anchor="start" font-family="Inter, Arial, Helvetica, sans-serif">laps per split</text>
+<text x="792" y="1016" font-size="12.2" font-weight="400" fill="#374151" text-anchor="start" font-family="Inter, Arial, Helvetica, sans-serif">Where each race came from</text>
+<text x="792" y="1033" font-size="11.3" font-weight="400" fill="#374151" text-anchor="start" font-family="ui-monospace, Menlo, Consolas, monospace">results/report/data_facts.md</text>
+<rect x="1070" y="940" width="262" height="170" rx="10" fill="#dbe9f6" stroke="#2b6cb0" stroke-width="1.6"/>
+<text x="1082" y="962" font-size="13.5" font-weight="700" fill="#1f2933" text-anchor="start" font-family="Inter, Arial, Helvetica, sans-serif">Dashboard bundle</text>
+<text x="1320" y="962" font-size="11" font-weight="600" fill="#2b6cb0" text-anchor="end" font-family="ui-monospace, Menlo, Consolas, monospace">dashboard</text>
+<text x="1082" y="982" font-size="12.2" font-weight="400" fill="#374151" text-anchor="start" font-family="Inter, Arial, Helvetica, sans-serif">Held-out races only:</text>
+<text x="1082" y="999" font-size="12.2" font-weight="400" fill="#374151" text-anchor="start" font-family="Inter, Arial, Helvetica, sans-serif">25 races, 27,658 laps</text>
+<text x="1082" y="1016" font-size="11.3" font-weight="400" fill="#374151" text-anchor="start" font-family="ui-monospace, Menlo, Consolas, monospace">app/data/laps.parquet  1 MB</text>
+<text x="1082" y="1033" font-size="12.2" font-weight="400" fill="#374151" text-anchor="start" font-family="Inter, Arial, Helvetica, sans-serif">No training data is published</text>
+<rect x="1360" y="940" width="262" height="170" rx="10" fill="#dbe9f6" stroke="#2b6cb0" stroke-width="1.6"/>
+<text x="1372" y="962" font-size="13.5" font-weight="700" fill="#1f2933" text-anchor="start" font-family="Inter, Arial, Helvetica, sans-serif">Race poster</text>
+<text x="1610" y="962" font-size="11" font-weight="600" fill="#2b6cb0" text-anchor="end" font-family="ui-monospace, Menlo, Consolas, monospace">race_poster</text>
+<text x="1372" y="982" font-size="12.2" font-weight="400" fill="#374151" text-anchor="start" font-family="Inter, Arial, Helvetica, sans-serif">One race at a time:</text>
+<text x="1372" y="999" font-size="12.2" font-weight="400" fill="#374151" text-anchor="start" font-family="Inter, Arial, Helvetica, sans-serif">lap times, strategy, positions,</text>
+<text x="1372" y="1016" font-size="12.2" font-weight="400" fill="#374151" text-anchor="start" font-family="Inter, Arial, Helvetica, sans-serif">gaps, degradation, forecast</text>
+<path d="M1491.0 860 L1491.0 898 L331.0 898" fill="none" stroke="#374151" stroke-width="1.8"/>
+<path d="M331.0 898 L331.0 940" fill="none" stroke="#374151" stroke-width="1.8" marker-end="url(#arrow)"/>
+<path d="M621.0 898 L621.0 940" fill="none" stroke="#374151" stroke-width="1.8" marker-end="url(#arrow)"/>
+<path d="M911.0 898 L911.0 940" fill="none" stroke="#374151" stroke-width="1.8" marker-end="url(#arrow)"/>
+<path d="M1201.0 898 L1201.0 940" fill="none" stroke="#374151" stroke-width="1.8" marker-end="url(#arrow)"/>
+<path d="M1491.0 898 L1491.0 940" fill="none" stroke="#374151" stroke-width="1.8" marker-end="url(#arrow)"/>
+<text x="927.0" y="893" font-size="11.5" font-weight="500" fill="#4b5563" text-anchor="start" font-family="Inter, Arial, Helvetica, sans-serif">model table</text>
+<text x="30" y="1174" font-size="13.5" font-weight="700" fill="#1f2933" text-anchor="start" font-family="Inter, Arial, Helvetica, sans-serif">Rules the pipeline keeps</text>
+<text x="30" y="1196" font-size="12.5" font-weight="400" fill="#374151" text-anchor="start" font-family="Inter, Arial, Helvetica, sans-serif">Every step reads the previous step&#x27;s file and writes its own, so any step can be rerun alone and the files show what each step did.</text>
+<text x="30" y="1215" font-size="12.5" font-weight="400" fill="#374151" text-anchor="start" font-family="Inter, Arial, Helvetica, sans-serif">Nothing learned from validation or test seasons flows back: fuel slopes, scaling and Stage 1 models come from training races only.</text>
+<text x="30" y="1234" font-size="12.5" font-weight="400" fill="#374151" text-anchor="start" font-family="Inter, Arial, Helvetica, sans-serif">All settings (seasons, thresholds, rule-forced races) are in configs/default.yaml. Raw and processed data are rebuilt by the pipeline and not committed.</text>
+<text x="30" y="1274" font-size="13.5" font-weight="700" fill="#1f2933" text-anchor="start" font-family="Inter, Arial, Helvetica, sans-serif">Key</text>
+<rect x="90" y="1260" width="30" height="18" rx="5" fill="#dbe9f6" stroke="#2b6cb0" stroke-width="1.5"/>
+<text x="130" y="1274" font-size="12.2" font-weight="400" fill="#374151" text-anchor="start" font-family="Inter, Arial, Helvetica, sans-serif">Pipeline step (Python module)</text>
+<rect x="358.8" y="1260" width="30" height="18" rx="2" fill="#ffffff" stroke="#6b7280" stroke-width="1.5"/>
+<text x="398.8" y="1274" font-size="12.2" font-weight="400" fill="#374151" text-anchor="start" font-family="Inter, Arial, Helvetica, sans-serif">Saved file or folder</text>
+<rect x="562.8" y="1260" width="30" height="18" rx="5" fill="#eeeeee" stroke="#6b7280" stroke-width="1.5" stroke-dasharray="6 4"/>
+<text x="602.8" y="1274" font-size="12.2" font-weight="400" fill="#374151" text-anchor="start" font-family="Inter, Arial, Helvetica, sans-serif">External service</text>
+<rect x="738.0" y="1260" width="30" height="18" rx="5" fill="#e3f3e6" stroke="#2f855a" stroke-width="1.5"/>
+<text x="778.0" y="1274" font-size="12.2" font-weight="400" fill="#374151" text-anchor="start" font-family="Inter, Arial, Helvetica, sans-serif">Quality gate</text>
+</svg>

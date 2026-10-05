@@ -1,0 +1,65 @@
+name: CI
+
+on:
+  push:
+  pull_request:
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+          cache: pip
+      - name: Install
+        run: |
+          pip install torch --index-url https://download.pytorch.org/whl/cpu
+          pip install -e ".[dev,dl,app]"
+      - name: Lint
+        run: |
+          ruff check .
+          ruff format --check .
+      - name: Test
+        run: pytest
+
+  docker:
+    runs-on: ubuntu-latest
+    needs: test
+    steps:
+      - uses: actions/checkout@v4
+      - name: Build image and run tests inside it
+        run: |
+          docker build -t f1pit .
+          docker run --rm f1pit
+
+  dashboard:
+    runs-on: ubuntu-latest
+    needs: test
+    steps:
+      - uses: actions/checkout@v4
+      - name: Build the dashboard image
+        run: docker build -f Dockerfile.dashboard -t f1pit-dashboard .
+      - name: Run the app script inside the image (only the dashboard's own dependencies)
+        run: |
+          docker run --rm f1pit-dashboard python -c "
+          from streamlit.testing.v1 import AppTest
+          app = AppTest.from_file('app/streamlit_app.py', default_timeout=120).run()
+          assert not app.exception and not app.error, (app.exception, app.error)
+          print('app script ran:', len(app.tabs), 'tabs')
+          "
+      - name: Start it and wait until it is healthy
+        run: |
+          docker run -d --name dashboard -p 8501:8501 f1pit-dashboard
+          for i in $(seq 1 30); do
+            if curl -fs http://localhost:8501/_stcore/health > /dev/null; then echo "healthy after $i tries"; exit 0; fi
+            sleep 2
+          done
+          docker logs dashboard
+          exit 1
+      - name: The page is served
+        run: curl -fs http://localhost:8501/ | grep -qi "<title>"
+      - name: Stop
+        if: always()
+        run: docker rm -f dashboard

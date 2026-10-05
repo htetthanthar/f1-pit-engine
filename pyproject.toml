@@ -1,0 +1,48 @@
+[build-system]
+requires = ["setuptools>=68"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "f1pit"
+version = "0.1.0"
+description = "Tyre-aware pit stop decision support for Formula 1 (final year project)"
+readme = "README.md"
+requires-python = ">=3.10"
+dependencies = [
+    "fastf1>=3.8",
+    "numpy>=1.24",
+    "pandas>=2.0",
+    "pyarrow>=14",
+    "pyyaml>=6.0",
+    "scikit-learn>=1.3",
+    "xgboost>=2.0",
+    "imbalanced-learn>=0.12",
+    "scipy>=1.10",
+    "matplotlib>=3.7",
+]
+
+[project.optional-dependencies]
+dev = ["pytest>=8", "ruff>=0.5"]
+# PyTorch for the Stage 2 neural models. On a CPU-only machine install the small CPU build first:
+#   pip install torch --index-url https://download.pytorch.org/whl/cpu
+dl = ["torch>=2.2"]
+track = ["mlflow>=2.10"]
+app = ["streamlit>=1.52", "altair>=5"]
+
+[tool.setuptools.packages.find]
+where = ["src"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+addopts = "-q"
+
+[tool.ruff]
+line-length = 110
+target-version = "py310"
+extend-exclude = ["notebooks"]   # exploration notebooks are not part of the package
+
+[tool.ruff.lint]
+select = ["E", "F", "I", "B", "UP"]
+
+[tool.ruff.lint.per-file-ignores]
+"app/*" = ["E501"]   # chart definitions and on-screen text read better on one line
