@@ -1,10 +1,10 @@
 # F1 Tyre-Aware Pit Stop Engine
 
-Final-year Computer Science project: a two-stage machine-learning system that forecasts Formula 1 tyre
-degradation (Stage 1) and uses that forecast to predict pit-stop laps (Stage 2), built on official
-F1 timing data through [FastF1](https://docs.fastf1.dev).
+Testing project: a two-stage machine-learning system that forecasts Formula 1 Tyre degradation 
+(Stage 1) and uses that forecast to predict pit-stop laps 
+(Stage 2), built on official F1 timing data through [FastF1](https://docs.fastf1.dev).
 
-**Research question:** does adding an explicit tyre-degradation forecast improve machine-learning
+**Research question:** does adding an explicit Tyre-degradation forecast improve machine-learning
 prediction of pit-stop laps?
 
 ## Architecture
