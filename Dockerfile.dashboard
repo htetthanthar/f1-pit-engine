@@ -13,6 +13,11 @@ COPY .streamlit ./.streamlit
 COPY src/f1pit/__init__.py src/f1pit/dashboard.py ./src/f1pit/
 COPY app ./app
 
+# Ensure bundle data is included (it looks in app/data and app/demo_data)
+# These directories ship with the repo and are required for the app to load
+RUN ls -la app/ && if [ ! -f app/data/bundle.json ] && [ ! -f app/demo_data/bundle.json ]; then \
+    echo "ERROR: No dashboard bundle found in app/data or app/demo_data"; exit 1; fi
+
 RUN useradd --create-home --uid 1000 appuser && chown -R appuser /srv
 USER appuser
 
