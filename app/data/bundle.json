@@ -1,9 +1,9 @@
 {
-  "created": "2026-10-05T09:08:27+00:00",
-  "models_fingerprint": "d505e31e4b3ceb52",
+  "created": "2026-10-04T18:52:31+00:00",
+  "models_fingerprint": "5499524cbb36613d",
   "evaluation_number": 2,
   "demo": false,
   "demo_note": null,
-  "laps": 7319,
-  "races": 7
+  "laps": 27658,
+  "races": 25
 }
