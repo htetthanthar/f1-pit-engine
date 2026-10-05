@@ -8,3 +8,7 @@ notebooks
 *.egg-info
 .pytest_cache
 .ruff_cache
+
+# Keep the shipped dashboard bundle available in the image.
+!app/data/
+!app/demo_data/
